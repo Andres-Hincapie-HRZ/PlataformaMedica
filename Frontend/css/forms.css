@@ -1,0 +1,187 @@
+/* ===================== FORMULARIOS ===================== */
+
+.form-group {
+    margin-bottom: var(--espaciado-lg);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--espaciado-sm);
+    font-weight: 500;
+    color: var(--texto-principal);
+    font-size: 0.875rem;
+}
+
+.form-label.required::after {
+    content: ' *';
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.form-label i {
+    color: #6b7280;
+    width: 16px;
+    text-align: center;
+}
+
+.form-label i.text-blue-500 {
+    color: #3b82f6;
+}
+
+.form-label i.text-purple-500 {
+    color: #8b5cf6;
+}
+
+.form-label i.text-green-500 {
+    color: #10b981;
+}
+
+.form-label i.text-orange-500 {
+    color: #f97316;
+}
+
+.form-label i.text-gray-500 {
+    color: #6b7280;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem var(--espaciado-md);
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    background-color: var(--bg-secundario);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-input.error {
+    border-color: var(--color-error);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+.form-error {
+    color: var(--color-error);
+    font-size: 0.75rem;
+    margin-top: var(--espaciado-xs);
+    display: block;
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.75rem var(--espaciado-md);
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    background-color: var(--bg-secundario);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem var(--espaciado-md);
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    background-color: var(--bg-secundario);
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-textarea:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-textarea::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Estados focus mejorados */
+.form-select:focus,
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+/* Mejoras para el selector de pacientes */
+.form-input:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: var(--color-primario);
+}
+
+/* Background para elementos readonly */
+.bg-gray-100 {
+    background-color: #f3f4f6;
+}
+
+/* Mejoras para formularios en 2 columnas */
+.columna-izquierda,
+.columna-derecha {
+    min-height: 100%;
+}
+
+/* Estados de focus mejorados para el buscador */
+#buscarPaciente:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background-color: #ffffff;
+}
+
+/* Estilos específicos para citas */
+.cita-datetime {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.cita-datetime:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: #ffffff;
+}
+
+/* File upload */
+.file-upload {
+    display: none;
+}
+
+.file-upload-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem var(--espaciado-lg);
+    background: var(--bg-gris-claro);
+    border: 2px dashed #d1d5db;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: var(--espaciado-sm);
+}
+
+.file-upload-label:hover {
+    background: #e5e7eb;
+    border-color: var(--color-primario);
+}

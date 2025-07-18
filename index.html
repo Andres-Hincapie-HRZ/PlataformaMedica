@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Médica - Sistema de Gestión</title>
+    <!-- Archivos CSS separados por sección -->
+    <link rel="stylesheet" href="Frontend/css/base.css">
+    <link rel="stylesheet" href="Frontend/css/login.css">
+    <link rel="stylesheet" href="Frontend/css/forms.css">
+    <link rel="stylesheet" href="Frontend/css/buttons.css">
+    <link rel="stylesheet" href="Frontend/css/dashboard.css">
+    <link rel="stylesheet" href="Frontend/css/cards.css">
+    <link rel="stylesheet" href="Frontend/css/tables.css">
+    <link rel="stylesheet" href="Frontend/css/modals.css">
+    <link rel="stylesheet" href="Frontend/css/badges.css">
+    <link rel="stylesheet" href="Frontend/css/utilities.css">
+    <link rel="stylesheet" href="Frontend/css/animations.css">
+    <link rel="stylesheet" href="Frontend/css/historias-clinicas.css">
+    <link rel="stylesheet" href="Frontend/css/tratamientos.css">
+    <link rel="stylesheet" href="Frontend/css/calendario.css">
+    <link rel="stylesheet" href="Frontend/css/cirugias.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- PANTALLA DE LOGIN -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h1 class="login-title">Plataforma Médica</h1>
+                <p class="login-subtitle">Sistema de Gestión de Pacientes y Cirugías</p>
+            </div>
+            
+            <!-- Formulario de Login -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-input" placeholder="doctor@clinica.com" required>
+                    <span class="form-error" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                    <span class="form-error" id="passwordError"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full btn-lg">
+                    <span id="loginBtnText">Iniciar Sesión</span>
+                    <div id="loginSpinner" class="loading-spinner hidden"></div>
+                </button>
+            </form>
+
+            <!-- Formulario de Registro -->
+            <form id="registerForm" class="login-form hidden">
+                <div class="grid grid-2 gap-4">
+                    <div class="form-group">
+                        <label for="regNombre" class="form-label">Nombre Completo</label>
+                        <input type="text" id="regNombre" class="form-input" placeholder="Dr. Juan Pérez" required>
+                        <span class="form-error" id="regNombreError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" id="regEmail" class="form-input" placeholder="doctor@clinica.com" required>
+                        <span class="form-error" id="regEmailError"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regTipoDoctor" class="form-label">Especialidad/Tipo</label>
+                    <select id="regTipoDoctor" class="form-select" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Médico General">Médico General</option>
+                        <option value="Cirujano Plástico">Cirujano Plástico</option>
+                        <option value="Anestesiólogo">Anestesiólogo</option>
+                        <option value="Dermatólogo">Dermatólogo</option>
+                        <option value="Cirujano Maxilofacial">Cirujano Maxilofacial</option>
+                        <option value="Medicina Estética">Medicina Estética</option>
+                        <option value="Enfermero/a">Enfermero/a</option>
+                        <option value="Instrumentista">Instrumentista</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                    <span class="form-error" id="regTipoDoctorError"></span>
+                </div>
+                
+                <div class="grid grid-2 gap-4">
+                    <div class="form-group">
+                        <label for="regPassword" class="form-label">Contraseña</label>
+                        <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                        <span class="form-error" id="regPasswordError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                        <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                        <span class="form-error" id="regConfirmPasswordError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regFoto" class="form-label">Foto de Perfil (Opcional)</label>
+                    <input type="file" id="regFoto" class="file-upload" accept="image/*">
+                    <label for="regFoto" class="file-upload-label">
+                        <i class="fas fa-camera"></i>
+                        Seleccionar Foto
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full btn-lg">
+                    <span id="registerBtnText">Registrarse</span>
+                    <div id="registerSpinner" class="loading-spinner hidden"></div>
+                </button>
+            </form>
+            
+            <!-- Botones de cambio -->
+            <div class="text-center mt-4">
+                <button id="showRegisterBtn" class="btn btn-secondary btn-sm">
+                    ¿No tienes cuenta? Regístrate
+                </button>
+                <button id="showLoginBtn" class="btn btn-secondary btn-sm hidden">
+                    ¿Ya tienes cuenta? Inicia Sesión
+                </button>
+            </div>
+            
+            <div id="loginError" class="form-error text-center mt-3 hidden"></div>
+            <div id="registerSuccess" class="text-center mt-3 hidden" style="color: #16a34a; font-size: 0.875rem;">
+                ¡Registro exitoso! Tu cuenta será activada por un administrador.
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PRINCIPAL -->
+    <div id="dashboardScreen" class="dashboard hidden">
+        <!-- SIDEBAR -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <h2 class="sidebar-title">MediPlatform</h2>
+                </div>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link active" data-section="dashboard">
+                        <i class="sidebar-nav-icon fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="pacientes">
+                        <i class="sidebar-nav-icon fas fa-users"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="historias">
+                        <i class="sidebar-nav-icon fas fa-clipboard-list"></i>
+                        Historias Clínicas
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="cirugias">
+                        <i class="sidebar-nav-icon fas fa-cut"></i>
+                        Cirugías
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="citas">
+                        <i class="sidebar-nav-icon fas fa-calendar-alt"></i>
+                        Citas
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="tratamientos">
+                        <i class="sidebar-nav-icon fas fa-pills"></i>
+                        Tratamientos
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" data-section="usuarios">
+                        <i class="sidebar-nav-icon fas fa-user-cog"></i>
+                        Gestión de Usuarios
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#" class="sidebar-nav-link" id="logoutBtn">
+                        <i class="sidebar-nav-icon fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- SECCIÓN DASHBOARD -->
+            <div id="dashboardSection" class="content-section">
+                <div class="content-header">
+                    <h1 class="content-title">Dashboard</h1>
+                    <div class="content-actions">
+                        <span id="currentUser" class="badge badge-primary"></span>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalPacientes">0</h3>
+                            <p>Total Pacientes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalCirugias">0</h3>
+                            <p>Cirugías Realizadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="citasHoy">0</h3>
+                            <p>Citas Hoy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon error">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="citasPendientes">0</h3>
+                            <p>Citas Pendientes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Citas Recientes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="citasRecientes"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Cirugías por Tipo</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="cirugiasPorTipo"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN PACIENTES -->
+            <div id="pacientesSection" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="content-title">Gestión de Pacientes</h1>
+                    <div class="content-actions">
+                        <button class="btn btn-primary" id="nuevoPacienteBtn">
+                            <i class="fas fa-plus"></i>
+                            Nuevo Paciente
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Pacientes</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Cédula</th>
+                                        <th>Teléfono</th>
+                                        <th>Email</th>
+                                        <th>Fecha Registro</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaPacientes">
+                                    <!-- Los pacientes se cargarán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN HISTORIAS CLÍNICAS -->
+            <div id="historiasSection" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="content-title">Historias Clínicas</h1>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div id="historiasLista"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN CIRUGÍAS -->
+            <div id="cirugiasSection" class="content-section hidden">
+                <div id="cirugiasLista"></div>
+            </div>
+
+            <!-- SECCIÓN CITAS -->
+            <div id="citasSection" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="content-title">Agendamiento de Citas</h1>
+                    <div class="content-actions">
+                        <button class="btn btn-primary" id="nuevaCitaBtn">
+                            <i class="fas fa-plus"></i>
+                            Nueva Cita
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Calendario</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="calendario"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Citas del Día</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="citasDelDia"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN TRATAMIENTOS -->
+            <div id="tratamientosSection" class="content-section hidden">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="tratamientosLista"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN USUARIOS -->
+            <div id="usuariosSection" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="content-title">Gestión de Usuarios</h1>
+                    <div class="content-actions">
+                        <button class="btn btn-primary" id="nuevoUsuarioBtn">
+                            <i class="fas fa-plus"></i>
+                            Nuevo Usuario
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Usuarios Administradores</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Especialidad</th>
+                                        <th>Fecha Creación</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaUsuarios">
+                                    <!-- Los usuarios se cargarán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL UNIVERSAL -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- El contenido del modal se cargará aquí -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <!-- Los botones del modal se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR DE TOASTS -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- SCRIPTS FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    
+    <!-- SCRIPTS DE LA APLICACIÓN -->
+    <script src="Backend/Config.js"></script>
+    <script src="Frontend/js/General.js"></script>
+    <script src="Frontend/js/historias-clinicas.js"></script>
+    <script src="Frontend/js/tratamientos.js"></script>
+    <script src="Frontend/js/calendario.js"></script>
+    <script src="Frontend/js/cirugias.js"></script>
+</body>
+</html>

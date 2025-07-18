@@ -1,0 +1,170 @@
+/* ===================== TABLAS ===================== */
+
+.table-container {
+    background: var(--bg-secundario);
+    border-radius: var(--radio-borde-grande);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: var(--espaciado-md) var(--espaciado-lg);
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table th {
+    background: var(--bg-gris-claro);
+    font-weight: 600;
+    color: var(--texto-principal);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table tbody tr:hover {
+    background: var(--bg-gris-claro);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilos específicos para cirugías */
+.cirugia-tipo {
+    font-weight: 600;
+    color: #4f46e5;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #bae6fd;
+    display: inline-block;
+}
+
+.cirugia-detalles {
+    padding: 1rem;
+}
+
+.detalle-item {
+    margin-bottom: 1rem;
+}
+
+.detalle-item strong {
+    display: block;
+    color: var(--texto-principal);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.detalle-item p {
+    color: var(--texto-secundario);
+    margin: 0;
+    padding: 0.5rem;
+    background: var(--bg-gris-claro);
+    border-radius: var(--radio-borde);
+    border: 1px solid #e5e7eb;
+}
+
+/* Mejoras para elementos flex en tablas */
+.table .flex {
+    display: flex;
+    align-items: center;
+}
+
+.table .gap-2 {
+    gap: 0.5rem;
+}
+
+.table .w-8 {
+    width: 2rem;
+}
+
+.table .h-8 {
+    height: 2rem;
+}
+
+.table .rounded-full {
+    border-radius: 50%;
+}
+
+.table .mr-3 {
+    margin-right: 0.75rem;
+}
+
+.table .font-medium {
+    font-weight: 500;
+}
+
+.table .text-sm {
+    font-size: 0.875rem;
+}
+
+.table .text-gray-500 {
+    color: var(--texto-secundario);
+}
+
+/* Estado vacío para cirugías */
+.text-center {
+    text-align: center;
+}
+
+.py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.fa-4x {
+    font-size: 4rem;
+}
+
+.text-gray-300 {
+    color: #d1d5db;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-gray-600 {
+    color: #4b5563;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.text-gray-500 {
+    color: #6b7280;
+}
+
+/* Responsive para tablas */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .cirugia-tipo {
+        font-size: 0.75rem;
+        padding: 0.125rem 0.375rem;
+    }
+}

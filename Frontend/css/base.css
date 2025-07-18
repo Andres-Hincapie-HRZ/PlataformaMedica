@@ -1,0 +1,81 @@
+/* ===================== RESET Y VARIABLES ===================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales */
+    --color-primario: #2563eb;
+    --color-secundario: #1e40af;
+    --color-acento: #3b82f6;
+    --color-exito: #16a34a;
+    --color-advertencia: #f59e0b;
+    --color-error: #dc2626;
+    
+    /* Colores de fondo */
+    --bg-principal: #f8fafc;
+    --bg-secundario: #ffffff;
+    --bg-oscuro: #1e293b;
+    --bg-gris-claro: #f1f5f9;
+    --bg-gris: #64748b;
+    
+    /* Colores de texto */
+    --texto-principal: #1e293b;
+    --texto-secundario: #64748b;
+    --texto-claro: #94a3b8;
+    --texto-blanco: #ffffff;
+    
+    /* Sombras */
+    --sombra-suave: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --sombra-media: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --sombra-intensa: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+    /* Tamaños */
+    --radio-borde: 8px;
+    --radio-borde-grande: 12px;
+    --espaciado-xs: 0.25rem;
+    --espaciado-sm: 0.5rem;
+    --espaciado-md: 1rem;
+    --espaciado-lg: 1.5rem;
+    --espaciado-xl: 2rem;
+    --espaciado-2xl: 3rem;
+}
+
+/* ===================== TIPOGRAFÍA ===================== */
+
+body {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    line-height: 1.6;
+    color: var(--texto-principal);
+    background-color: var(--bg-principal);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: var(--espaciado-md);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p {
+    margin-bottom: var(--espaciado-md);
+    color: var(--texto-secundario);
+}
+
+/* ===================== LAYOUT PRINCIPAL ===================== */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,211 @@
+/* ===================== MODALES ===================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: var(--espaciado-lg);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal {
+    background: var(--bg-secundario);
+    border-radius: var(--radio-borde-grande);
+    box-shadow: var(--sombra-intensa);
+    width: 100%;
+    max-width: 1200px;
+    max-height: 95vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+/* Modal específico para historias clínicas */
+.modal.modal-historia {
+    max-width: 1400px;
+    width: 95%;
+}
+
+/* Modal para agendar citas */
+.modal.modal-cita {
+    max-width: 800px;
+    width: 95%;
+    animation: modalSlideInSmooth 0.4s ease-out;
+}
+
+.modal-header {
+    padding: var(--espaciado-xl);
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    margin: 0;
+    color: var(--texto-principal);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--texto-secundario);
+    padding: var(--espaciado-sm);
+    border-radius: var(--radio-borde);
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--bg-gris-claro);
+    color: var(--texto-principal);
+}
+
+.modal-body {
+    padding: var(--espaciado-xl);
+}
+
+.modal-footer {
+    padding: var(--espaciado-xl);
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espaciado-md);
+}
+
+/* Estilos específicos para modal de citas */
+.modal.modal-cita .modal-body {
+    padding: 2rem;
+}
+
+.modal.modal-cita .modal-footer {
+    padding: 1.5rem 2rem;
+    background: #f8fafc;
+}
+
+.modal.modal-cita .modal-header {
+    padding: 1.5rem 2rem;
+}
+
+/* Contenedor para agendar cita */
+.agendar-cita-container {
+    max-width: 100%;
+}
+
+.agendar-cita-container .grid-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.cita-form-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+}
+
+.alert-success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.paciente-info-card {
+    background: #fafafa;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.paciente-info-card .border {
+    border-color: #e5e7eb;
+}
+
+/* Responsive para modales */
+@media (max-width: 1024px) {
+    .modal.modal-historia {
+        max-width: 95%;
+        width: 95%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal.modal-cita {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal {
+        margin: var(--espaciado-md);
+        max-width: none;
+    }
+    
+    .modal.modal-historia .grid.grid-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal.modal-historia .card-header h4 {
+        font-size: 1rem;
+    }
+    
+    .modal.modal-cita {
+        max-width: 95%;
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .agendar-cita-container .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .paciente-info-card .flex {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .alert-success {
+        padding: 1rem;
+    }
+    
+    .alert-success .text-lg {
+        font-size: 1rem;
+    }
+    
+    .cita-form-section {
+        padding: 1rem;
+    }
+}
+
+/* Animaciones para modales */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalSlideInSmooth {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

@@ -1,0 +1,127 @@
+/* ===================== DASHBOARD ===================== */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    background: var(--bg-oscuro);
+    color: var(--texto-blanco);
+    padding: var(--espaciado-xl) 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 0 var(--espaciado-xl);
+    margin-bottom: var(--espaciado-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-md);
+}
+
+.sidebar-logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+    border-radius: var(--radio-borde);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.sidebar-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.sidebar-nav {
+    list-style: none;
+}
+
+.sidebar-nav-item {
+    margin-bottom: var(--espaciado-xs);
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    padding: var(--espaciado-md) var(--espaciado-xl);
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: var(--espaciado-md);
+    border-left: 3px solid transparent;
+}
+
+.sidebar-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--texto-blanco);
+    border-left-color: var(--color-primario);
+}
+
+.sidebar-nav-link.active {
+    background: rgba(37, 99, 235, 0.2);
+    color: var(--texto-blanco);
+    border-left-color: var(--color-primario);
+}
+
+.sidebar-nav-icon {
+    font-size: 1.125rem;
+    width: 20px;
+    text-align: center;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: var(--espaciado-xl);
+    transition: margin-left 0.3s ease;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--espaciado-xl);
+    flex-wrap: wrap;
+    gap: var(--espaciado-md);
+}
+
+.content-title {
+    margin: 0;
+    color: var(--texto-principal);
+}
+
+.content-actions {
+    display: flex;
+    gap: var(--espaciado-md);
+    align-items: center;
+}
+
+/* Responsive para dashboard */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

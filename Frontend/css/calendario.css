@@ -1,0 +1,559 @@
+/* ===================== ESTILOS DEL CALENDARIO PROFESIONAL ===================== */
+
+.calendario-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* Header del calendario */
+.calendario-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendario-navegacion {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calendario-titulo {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-width: 200px;
+    text-align: center;
+}
+
+.calendario-prev,
+.calendario-next {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendario-prev:hover,
+.calendario-next:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.calendario-hoy {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.calendario-hoy:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Días de la semana */
+.calendario-dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.calendario-dia-semana {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Grid del calendario */
+.calendario-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: white;
+}
+
+.calendario-dia {
+    min-height: 120px;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendario-dia:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendario-dia-hoy {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.calendario-dia-hoy .calendario-numero {
+    color: white;
+    font-weight: bold;
+}
+
+.calendario-dia-seleccionado {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.calendario-dia-seleccionado .calendario-numero {
+    color: white;
+    font-weight: bold;
+}
+
+.calendario-dia-otro-mes {
+    background: #f8fafc;
+    color: #94a3b8;
+    cursor: default;
+}
+
+.calendario-dia-otro-mes:hover {
+    background: #f8fafc;
+    transform: none;
+    box-shadow: none;
+}
+
+.calendario-numero {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+/* Eventos en el calendario */
+.calendario-eventos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.calendario-evento {
+    background: #3b82f6;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.calendario-evento:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.evento-hora {
+    font-weight: 600;
+    display: block;
+}
+
+.evento-paciente {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendario-evento-mas {
+    background: #64748b;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calendario-evento-mas:hover {
+    background: #475569;
+    transform: scale(1.02);
+}
+
+/* Leyenda */
+.calendario-leyenda {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.leyenda-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+}
+
+/* Sección de citas del día */
+.citas-dia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.citas-dia-header h4 {
+    margin: 0;
+    color: #1e293b;
+    text-transform: capitalize;
+}
+
+/* Tarjetas de citas */
+.cita-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid #e2e8f0;
+}
+
+.cita-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cita-urgente {
+    border-left-color: #dc2626;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+}
+
+.cita-normal {
+    border-left-color: #10b981;
+}
+
+.cita-card .card-body {
+    padding: 1rem;
+}
+
+.cita-card h5 {
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.cita-card .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.cita-card .text-gray-600 {
+    color: #64748b;
+}
+
+.cita-card .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Detalle de cita en modal */
+.cita-detalle h4 {
+    color: #1e293b;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.cita-detalle p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.cita-detalle strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Estados de citas */
+.badge-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.badge-error {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+}
+
+.badge-secondary {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calendario-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .calendario-navegacion {
+        justify-content: center;
+    }
+    
+    .calendario-titulo {
+        font-size: 1.25rem;
+        min-width: auto;
+    }
+    
+    .calendario-dia {
+        min-height: 80px;
+        padding: 0.25rem;
+    }
+    
+    .calendario-numero {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .calendario-evento {
+        font-size: 0.7rem;
+        padding: 1px 4px;
+    }
+    
+    .evento-paciente {
+        display: none; /* Ocultar nombre en móviles */
+    }
+    
+    .calendario-leyenda {
+        gap: 1rem;
+        padding: 0.75rem;
+    }
+    
+    .leyenda-item {
+        font-size: 0.8rem;
+    }
+    
+    .citas-dia-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .cita-card .flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .cita-card .flex-col {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendario-dia {
+        min-height: 60px;
+        padding: 0.125rem;
+    }
+    
+    .calendario-numero {
+        font-size: 0.9rem;
+    }
+    
+    .calendario-evento {
+        font-size: 0.65rem;
+        padding: 1px 2px;
+    }
+    
+    .evento-hora {
+        font-size: 0.6rem;
+    }
+    
+    .calendario-leyenda {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+/* Animaciones */
+@keyframes calendarioFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calendario-wrapper {
+    animation: calendarioFadeIn 0.5s ease-out;
+}
+
+@keyframes eventoSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.calendario-evento {
+    animation: eventoSlideIn 0.3s ease-out;
+}
+
+/* Mejoras de accesibilidad */
+.calendario-dia:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
+}
+
+.calendario-evento:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 1px;
+}
+
+/* Loading state */
+.calendario-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: #64748b;
+}
+
+.calendario-loading i {
+    font-size: 2rem;
+    margin-right: 1rem;
+    animation: spin 1s linear infinite;
+}
+
+/* Estados vacíos */
+.calendario-sin-citas {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}
+
+.calendario-sin-citas i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Tooltips para eventos */
+.calendario-evento[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Estilos para el formulario de citas */
+.cita-datetime {
+    font-family: inherit;
+}
+
+.form-group .form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-select,
+.form-input,
+.form-textarea {
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus,
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+/* Mejoras para el grid responsive */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
