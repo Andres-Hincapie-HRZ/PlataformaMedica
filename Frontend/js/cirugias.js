@@ -1000,3 +1000,13 @@ class CirugiasManager {
         }
     }
 }
+
+// Hacer la función guardarCirugia disponible globalmente
+window.guardarCirugia = function(id = '') {
+    if (window.cirugiasManager) {
+        return window.cirugiasManager.guardarCirugia(id);
+    } else {
+        console.error('CirugiasManager no está disponible');
+        mostrarToast('Error: Manager de cirugías no disponible', 'error');
+    }
+};

@@ -19,29 +19,29 @@
 }
 
 .form-label i {
-    color: #6b7280;
+    color: var(--color-primario);
     width: 16px;
     text-align: center;
 }
 
 .form-label i.text-blue-500 {
-    color: #3b82f6;
+    color: var(--color-primario);
 }
 
 .form-label i.text-purple-500 {
-    color: #8b5cf6;
+    color: var(--color-acento);
 }
 
 .form-label i.text-green-500 {
-    color: #10b981;
+    color: var(--color-exito);
 }
 
 .form-label i.text-orange-500 {
-    color: #f97316;
+    color: var(--color-advertencia);
 }
 
 .form-label i.text-gray-500 {
-    color: #6b7280;
+    color: var(--color-primario);
 }
 
 .form-input {
@@ -57,7 +57,7 @@
 
 .form-input:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 .form-input.error {
@@ -90,7 +90,7 @@
 
 .form-select:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 .form-textarea {
@@ -109,7 +109,7 @@
 
 .form-textarea:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 .form-textarea::placeholder {
@@ -117,16 +117,16 @@
     font-style: italic;
 }
 
-/* Estados focus mejorados */
+/* Estados focus mejorados con colores EVA */
 .form-select:focus,
 .form-input:focus,
 .form-textarea:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
     outline: none;
 }
 
-/* Mejoras para el selector de pacientes */
+/* Mejoras para el selector de pacientes con colores EVA */
 .form-input:focus {
     outline: none;
     ring: 2px;
@@ -144,14 +144,14 @@
     min-height: 100%;
 }
 
-/* Estados de focus mejorados para el buscador */
+/* Estados de focus mejorados para el buscador con colores EVA */
 #buscarPaciente:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
     background-color: #ffffff;
 }
 
-/* Estilos específicos para citas */
+/* Estilos específicos para citas con colores EVA */
 .cita-datetime {
     background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
     border: 2px solid #e2e8f0;
@@ -159,8 +159,8 @@
 }
 
 .cita-datetime:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
     background: #ffffff;
 }
 

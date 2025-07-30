@@ -7,10 +7,10 @@
 }
 
 :root {
-    /* Colores principales */
-    --color-primario: #2563eb;
-    --color-secundario: #1e40af;
-    --color-acento: #3b82f6;
+    /* Colores principales - EVA Cirugía Corporal */
+    --color-primario: #e91e63;
+    --color-secundario: #c2185b;
+    --color-acento: #f06292;
     --color-exito: #16a34a;
     --color-advertencia: #f59e0b;
     --color-error: #dc2626;
@@ -159,7 +159,7 @@ p {
 
 .form-input:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 .form-input.error {
@@ -187,7 +187,7 @@ p {
 
 .form-select:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 .form-textarea {
@@ -206,7 +206,7 @@ p {
 
 .form-textarea:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
 }
 
 /* ===================== BOTONES ===================== */
@@ -369,9 +369,10 @@ p {
 }
 
 .sidebar-nav-link.active {
-    background: rgba(37, 99, 235, 0.2);
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
     color: var(--texto-blanco);
-    border-left-color: var(--color-primario);
+    border-left-color: var(--color-acento);
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
 }
 
 .sidebar-nav-icon {
@@ -646,8 +647,10 @@ p {
 }
 
 .badge-primary {
-    background: rgba(37, 99, 235, 0.1);
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(240, 98, 146, 0.1) 100%);
     color: var(--color-primario);
+    border: 1px solid rgba(233, 30, 99, 0.2);
+    border-radius: 20px;
 }
 
 .badge-success {
@@ -1461,12 +1464,12 @@ p {
     font-style: italic;
 }
 
-/* Estados focus mejorados */
+/* Estados focus mejorados con colores EVA */
 .form-select:focus,
 .form-input:focus,
 .form-textarea:focus {
     border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
     outline: none;
 }
 

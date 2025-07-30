@@ -1,16 +1,334 @@
 /* ===================== ESTILOS PARA GESTIÓN DE CIRUGÍAS ===================== */
 
-/* Header de cirugías */
-.cirugias-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    padding: 2rem;
-    color: white;
-    margin-bottom: 2rem;
+/* CORRECCIÓN PRINCIPAL - Solo cambiar texto a blanco en fondos rosa, mantener fondos */
+*[style*="background-color: rgb(233, 30, 99)"],
+*[style*="background: rgb(233, 30, 99)"],
+*[style*="background-color: #e91e63"],
+*[style*="background: #e91e63"],
+*[style*="background: linear-gradient"][style*="233, 30, 99"],
+*[style*="background: linear-gradient"][style*="e91e63"],
+*[style*="background: linear-gradient"][style*="var(--color-primario)"],
+.bg-primary,
+.header-primary {
+    color: white !important;
 }
 
-.cirugias-header h2 {
-    color: white;
+*[style*="background-color: rgb(233, 30, 99)"] *,
+*[style*="background: rgb(233, 30, 99)"] *,
+*[style*="background-color: #e91e63"] *,
+*[style*="background: #e91e63"] *,
+*[style*="background: linear-gradient"][style*="233, 30, 99"] *,
+*[style*="background: linear-gradient"][style*="e91e63"] *,
+*[style*="background: linear-gradient"][style*="var(--color-primario)"] *,
+.bg-primary *,
+.header-primary * {
+    color: white !important;
+}
+
+/* BOTONES GRISES - Nueva Cirugía y similares */
+.btn-primary,
+button.btn-primary,
+.content-actions .btn-primary,
+.content-actions button,
+button[onclick*="nueva"],
+button[onclick*="Nueva"],
+a.btn-primary,
+.btn[class*="primary"] {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    background-color: #64748b !important;
+    color: white !important;
+    border: none !important;
+    border-color: transparent !important;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover,
+.content-actions .btn-primary:hover,
+.content-actions button:hover,
+button[onclick*="nueva"]:hover,
+button[onclick*="Nueva"]:hover,
+a.btn-primary:hover,
+.btn[class*="primary"]:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+    background-color: #475569 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3) !important;
+}
+
+/* ELEMENTOS ESPECÍFICOS QUE DEBEN SER GRISES */
+.lista-cirugias-header,
+.citas-recientes-header,
+.card-header:contains("Lista de Cirugías"),
+.card-header:contains("Citas Recientes") {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+}
+
+.lista-cirugias-header *,
+.citas-recientes-header *,
+.card-header:contains("Lista de Cirugías") *,
+.card-header:contains("Citas Recientes") * {
+    color: white !important;
+}
+
+/* CORRECCIÓN MÁXIMA PRIORIDAD - Todos los elementos con fondo rosa/magenta */
+.card-header[style*="background-color: rgb(233, 30, 99)"],
+.card-header[style*="background: rgb(233, 30, 99)"],
+.card-header[style*="background-color: #e91e63"],
+.card-header[style*="background: #e91e63"],
+.card-header[style*="background: linear-gradient"][style*="233, 30, 99"],
+.card-header[style*="background: linear-gradient"][style*="e91e63"],
+div[style*="background-color: rgb(233, 30, 99)"],
+div[style*="background: rgb(233, 30, 99)"],
+div[style*="background-color: #e91e63"],
+div[style*="background: #e91e63"],
+div[style*="background: linear-gradient"][style*="233, 30, 99"],
+div[style*="background: linear-gradient"][style*="e91e63"] {
+    color: white !important;
+}
+
+.card-header[style*="background-color: rgb(233, 30, 99)"] *,
+.card-header[style*="background: rgb(233, 30, 99)"] *,
+.card-header[style*="background-color: #e91e63"] *,
+.card-header[style*="background: #e91e63"] *,
+.card-header[style*="background: linear-gradient"][style*="233, 30, 99"] *,
+.card-header[style*="background: linear-gradient"][style*="e91e63"] *,
+div[style*="background-color: rgb(233, 30, 99)"] *,
+div[style*="background: rgb(233, 30, 99)"] *,
+div[style*="background-color: #e91e63"] *,
+div[style*="background: #e91e63"] *,
+div[style*="background: linear-gradient"][style*="233, 30, 99"] *,
+div[style*="background: linear-gradient"][style*="e91e63"] * {
+    color: white !important;
+}
+
+/* CORRECCIÓN ESPECÍFICA PARA BOTONES - Máxima prioridad */
+.btn-primary,
+button.btn-primary,
+.content-actions .btn-primary,
+.content-actions button,
+button[onclick*="nueva"],
+button[onclick*="Nueva"],
+a.btn-primary,
+.btn[class*="primary"] {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    background-color: #64748b !important;
+    color: white !important;
+    border: none !important;
+    border-color: transparent !important;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover,
+.content-actions .btn-primary:hover,
+.content-actions button:hover,
+button[onclick*="nueva"]:hover,
+button[onclick*="Nueva"]:hover,
+a.btn-primary:hover,
+.btn[class*="primary"]:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+    background-color: #475569 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3) !important;
+}
+
+/* Corrección de paneles y headers para consistencia */
+.card-header,
+.table-container .table th,
+.filtros-cirugias,
+.stats-grid .stat-card {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+}
+
+/* Headers de secciones específicas con fondo gris consistente */
+.card-header h1,
+.card-header h2,
+.card-header h3,
+.card-header h4,
+.card-header h5,
+.card-header h6,
+.card-header p,
+.card-header span,
+.card-header div {
+    color: #1e293b !important;
+}
+
+/* Lista de Cirugías - Header gris */
+.lista-cirugias-header,
+.citas-recientes-header,
+.card-header[style*="background"] {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+}
+
+.lista-cirugias-header h1,
+.lista-cirugias-header h2,
+.lista-cirugias-header h3,
+.lista-cirugias-header h4,
+.lista-cirugias-header h5,
+.lista-cirugias-header h6,
+.citas-recientes-header h1,
+.citas-recientes-header h2,
+.citas-recientes-header h3,
+.citas-recientes-header h4,
+.citas-recientes-header h5,
+.citas-recientes-header h6,
+.card-header[style*="background"] h1,
+.card-header[style*="background"] h2,
+.card-header[style*="background"] h3,
+.card-header[style*="background"] h4,
+.card-header[style*="background"] h5,
+.card-header[style*="background"] h6 {
+    color: white !important;
+    margin: 0;
+}
+
+/* Corrección específica para elementos con fondo rosa que deben tener texto blanco */
+[style*="background: linear-gradient"][style*="e91e63"],
+[style*="background-color: #e91e63"],
+.bg-primary,
+.header-primary,
+.card-header.bg-primary,
+.lista-cirugias-header,
+.citas-recientes-header {
+    color: white !important;
+}
+
+[style*="background: linear-gradient"][style*="e91e63"] *,
+[style*="background-color: #e91e63"] *,
+.bg-primary *,
+.header-primary *,
+.card-header.bg-primary *,
+.lista-cirugias-header *,
+.citas-recientes-header * {
+    color: white !important;
+}
+
+/* Corrección adicional para headers específicos */
+.card-header.text-white,
+.card-header.text-white h1,
+.card-header.text-white h2,
+.card-header.text-white h3,
+.card-header.text-white h4,
+.card-header.text-white h5,
+.card-header.text-white h6,
+.card-header.text-white p,
+.card-header.text-white span,
+.card-header.text-white div {
+    color: white !important;
+}
+
+/* Estilos específicos para elementos que aparecen en las imágenes */
+.lista-cirugias-title,
+.citas-recientes-title {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    padding: 1rem 1.5rem;
+    margin: 0;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Asegurar que todos los botones primarios en content-actions sean grises */
+.content-actions .btn,
+.content-actions button,
+.btn-nueva-cirugia,
+button[class*="nueva"],
+button[class*="primary"],
+.btn[class*="primary"] {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Correcciones adicionales para elementos específicos de las imágenes */
+.card-header[style*="pink"],
+.card-header[style*="magenta"],
+.card-header[style*="#e91e63"],
+.header-pink,
+.bg-pink {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+}
+
+.card-header[style*="pink"] *,
+.card-header[style*="magenta"] *,
+.card-header[style*="#e91e63"] *,
+.header-pink *,
+.bg-pink * {
+    color: white !important;
+}
+
+/* Estilos específicos para "Lista de Cirugías" y "Citas Recientes" */
+.card-header:contains("Lista de Cirugías"),
+.card-header:contains("Citas Recientes"),
+[data-title*="Lista"],
+[data-title*="Citas"] {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+}
+
+/* Corrección global para cualquier header con fondo rosa */
+.card-header {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+}
+
+/* Excepciones para headers que deben ser grises */
+.card-header.lista-header,
+.card-header.citas-header,
+.lista-cirugias-header,
+.citas-recientes-header {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+}
+
+/* Botón Nueva Cirugía - Estilo gris */
+.btn-nueva-cirugia,
+.content-actions .btn-primary {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(100, 116, 139, 0.2);
+}
+
+.btn-nueva-cirugia:hover,
+.content-actions .btn-primary:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3) !important;
+}
+
+/* Header de cirugías con colores EVA */
+.cirugias-header {
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    color: white !important;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+}
+
+.cirugias-header h2,
+.cirugias-header h1,
+.cirugias-header h3,
+.cirugias-header h4,
+.cirugias-header h5,
+.cirugias-header h6,
+.cirugias-header p,
+.cirugias-header span,
+.cirugias-header div {
+    color: white !important;
     margin-bottom: 1rem;
 }
 
@@ -64,7 +382,7 @@
 }
 
 .stat-icon.primary {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
     color: white;
 }
 
@@ -185,7 +503,7 @@
 }
 
 .calendario-header {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
     color: white;
     padding: 1.5rem;
     display: flex;

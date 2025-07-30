@@ -45,11 +45,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    color: white;
+    border-radius: var(--radio-borde-grande) var(--radio-borde-grande) 0 0;
 }
 
 .modal-title {
     margin: 0;
-    color: var(--texto-principal);
+    color: white;
+    font-weight: 600;
 }
 
 .modal-close {
@@ -57,15 +61,16 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--texto-secundario);
+    color: rgba(255, 255, 255, 0.8);
     padding: var(--espaciado-sm);
     border-radius: var(--radio-borde);
     transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-    background: var(--bg-gris-claro);
-    color: var(--texto-principal);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: scale(1.1);
 }
 
 .modal-body {

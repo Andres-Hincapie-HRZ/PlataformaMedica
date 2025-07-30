@@ -272,15 +272,22 @@ const HistoriasService = {
 
 // Funciones para manejar citas
 const CitasService = {
-  // Crear nueva cita
+  // Crear nueva cita (paciente registrado o externo)
   async crearCita(datosCita) {
     try {
       if (!db) {
         throw new Error('Firebase no está inicializado');
       }
+      
+      // Validar que tenga al menos idPaciente O datos de paciente externo
+      if (!datosCita.idPaciente && !datosCita.pacienteExterno) {
+        throw new Error('Debe especificar un paciente registrado o datos de paciente externo');
+      }
+      
       const docRef = await db.collection("citas").add({
         ...datosCita,
-        fechaCreacion: firebase.firestore.Timestamp.now()
+        fechaCreacion: firebase.firestore.Timestamp.now(),
+        tipoPaciente: datosCita.idPaciente ? 'registrado' : 'externo'
       });
       return docRef.id;
     } catch (error) {

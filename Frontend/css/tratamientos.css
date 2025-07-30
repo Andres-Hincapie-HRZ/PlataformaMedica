@@ -1,13 +1,415 @@
-/* ===================== ESTILOS ESPECÍFICOS PARA TRATAMIENTOS ===================== */
+/* ===================== ESTILOS ESPECÍFICOS PARA TRATAMIENTOS - INTERFAZ PROFESIONAL ===================== */
+
+/* CORRECCIÓN GLOBAL PARA UNDEFINED */
+.undefined,
+*:contains("undefined"),
+[data-value="undefined"],
+.tratamiento-card .undefined {
+    display: none !important;
+}
+
+/* Reemplazar undefined con texto apropiado */
+.tratamiento-card .paciente-info:empty::before,
+.tratamiento-card .info-value:empty::before,
+.info-value:contains("undefined")::before {
+    content: "No especificado";
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+/* Header de tratamientos */
+.tratamientos-header {
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    color: white !important;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+}
+
+/* Layout principal de tratamientos */
+.tratamientos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estadísticas mejoradas */
+.tratamientos-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card-tratamiento {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-tratamiento::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-acento) 100%);
+}
+
+.stat-card-tratamiento:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(233, 30, 99, 0.15);
+}
+
+.stat-icon-tratamiento {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+    color: white;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.stat-content-tratamiento h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-content-tratamiento p {
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tratamientos-header h1,
+.tratamientos-header h2,
+.tratamientos-header h3,
+.tratamientos-header h4,
+.tratamientos-header h5,
+.tratamientos-header h6,
+.tratamientos-header p,
+.tratamientos-header span,
+.tratamientos-header div {
+    color: white !important;
+    margin-bottom: 1rem;
+}
+
+/* Botón Nuevo Tratamiento - Estilo gris */
+.btn-nuevo-tratamiento,
+.content-actions .btn-primary {
+    background: linear-gradient(135deg, #64748b 0%, #475569 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(100, 116, 139, 0.2);
+}
+
+.btn-nuevo-tratamiento:hover,
+.content-actions .btn-primary:hover {
+    background: linear-gradient(135deg, #475569 0%, #334155 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3) !important;
+}
+
+/* Estadísticas de tratamientos */
+.tratamientos-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tratamiento-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tratamiento-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tratamiento-stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+    color: white;
+}
+
+.tratamiento-stat-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+    line-height: 1;
+}
+
+.tratamiento-stat-content p {
+    color: #6b7280;
+    margin: 0.25rem 0 0 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
 
 /* Tipos de cirugía */
-.cirugia-tipo {
+.cirugia-tipo,
+.tratamiento-tipo {
     background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
     color: white;
     padding: var(--espaciado-sm) var(--espaciado-md);
     border-radius: var(--radio-borde);
     font-weight: 500;
     font-size: 0.875rem;
+}
+
+/* Tarjetas de tratamientos mejoradas */
+.tratamiento-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tratamiento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-acento) 100%);
+}
+
+.tratamiento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(233, 30, 99, 0.15);
+    border-color: var(--color-primario);
+}
+
+/* Header mejorado de la tarjeta */
+.tratamiento-card .tratamiento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tratamiento-card .tratamiento-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tratamiento-card .tratamiento-paciente {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0 0;
+    font-weight: 500;
+}
+
+/* Información del tratamiento mejorada */
+.tratamiento-card .tratamiento-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tratamiento-card .info-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.tratamiento-card .info-item:hover {
+    background: #f1f5f9;
+    border-color: var(--color-primario);
+    transform: translateY(-1px);
+}
+
+.tratamiento-card .info-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tratamiento-card .info-label::before {
+    content: '•';
+    color: var(--color-primario);
+    font-size: 1rem;
+}
+
+.tratamiento-card .info-value {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 1rem;
+}
+
+/* Estados de tratamientos */
+.tratamiento-estado {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.tratamiento-estado.activo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.tratamiento-estado.pendiente {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.tratamiento-estado.finalizado {
+    background: #e0f2fe;
+    color: #0c4a6e;
+}
+
+.tratamiento-estado.cancelado {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Medicamentos */
+.medicamentos-list {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.medicamento-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.medicamento-item:last-child {
+    margin-bottom: 0;
+}
+
+.medicamento-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.medicamento-info {
+    flex: 1;
+}
+
+.medicamento-nombre {
+    font-weight: 500;
+    color: #1f2937;
+    margin: 0;
+}
+
+.medicamento-dosis {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Filtros de tratamientos */
+.tratamientos-filtros {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tratamientos-filtros .form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Corrección para elementos undefined */
+.tratamiento-card .undefined,
+.info-value:empty::before {
+    content: "No especificado";
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Prevenir undefined en JavaScript */
+.tratamiento-card [data-field]:empty::before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+    font-style: italic;
 }
 
 /* Estados de citas */
@@ -62,8 +464,8 @@
 }
 
 .cita-datetime:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
     background: #ffffff;
 }
 
@@ -108,25 +510,25 @@
     border-color: #e5e7eb;
 }
 
-/* Labels con iconos de colores para citas */
+/* Labels con iconos de colores EVA para citas */
 .form-label i.text-blue-500 {
-    color: #3b82f6;
+    color: var(--color-primario);
 }
 
 .form-label i.text-purple-500 {
-    color: #8b5cf6;
+    color: var(--color-acento);
 }
 
 .form-label i.text-green-500 {
-    color: #10b981;
+    color: var(--color-exito);
 }
 
 .form-label i.text-orange-500 {
-    color: #f97316;
+    color: var(--color-advertencia);
 }
 
 .form-label i.text-gray-500 {
-    color: #6b7280;
+    color: var(--color-primario);
 }
 
 /* Mejoras para el modal de citas */
@@ -226,4 +628,356 @@
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/* ===================== ESTILOS ADICIONALES PARA INTERFAZ PROFESIONAL ===================== */
+
+/* Barra de búsqueda mejorada */
+.tratamientos-search {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.tratamientos-search input {
+    flex: 1;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.tratamientos-search input:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+    outline: none;
+}
+
+.tratamientos-search select {
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.tratamientos-search select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+    outline: none;
+}
+
+/* Medicamentos mejorados */
+.medicamentos-section {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid #f1f5f9;
+}
+
+.medicamentos-section h4 {
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.medicamentos-section h4::before {
+    content: '💊';
+    font-size: 1.25rem;
+}
+
+.medicamento-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.medicamento-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.1);
+    border-color: var(--color-primario);
+}
+
+.medicamento-item:last-child {
+    margin-bottom: 0;
+}
+
+.medicamento-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.medicamento-info {
+    flex: 1;
+}
+
+.medicamento-nombre {
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+}
+
+.medicamento-dosis {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Acciones de tratamiento */
+.tratamiento-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.tratamiento-actions .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.tratamiento-actions .btn-edit {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.tratamiento-actions .btn-edit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.tratamiento-actions .btn-delete {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.tratamiento-actions .btn-delete:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.tratamiento-actions .btn-complete {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.tratamiento-actions .btn-complete:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Estado vacío mejorado */
+.tratamientos-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+}
+
+.tratamientos-empty .empty-icon {
+    font-size: 4rem;
+    color: #d1d5db;
+    margin-bottom: 1rem;
+}
+
+.tratamientos-empty h3 {
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.tratamientos-empty p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+/* Paginación mejorada */
+.tratamientos-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.tratamientos-pagination .page-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid #f1f5f9;
+    background: white;
+    border-radius: 8px;
+    color: #6b7280;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tratamientos-pagination .page-btn:hover {
+    border-color: var(--color-primario);
+    color: var(--color-primario);
+}
+
+.tratamientos-pagination .page-btn.active {
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+    border-color: var(--color-primario);
+    color: white;
+}
+
+/* Corrección final para undefined */
+.tratamiento-card *:contains("undefined") {
+    display: none !important;
+}
+
+.tratamiento-card .info-value:empty,
+.tratamiento-card .tratamiento-paciente:empty {
+    display: none;
+}
+
+.tratamiento-card .info-value:empty + .info-label::after {
+    content: "No especificado";
+    color: #9ca3af;
+    font-style: italic;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .tratamientos-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-card-tratamiento {
+        padding: 1.5rem;
+    }
+    
+    .stat-icon-tratamiento {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+        margin-right: 1rem;
+    }
+    
+    .stat-content-tratamiento h3 {
+        font-size: 2rem;
+    }
+    
+    .tratamiento-card {
+        padding: 1.5rem;
+    }
+    
+    .tratamiento-card .tratamiento-info {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .tratamientos-search {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .tratamientos-search input,
+    .tratamientos-search select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .tratamientos-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tratamiento-card .tratamiento-title {
+        font-size: 1.125rem;
+    }
+    
+    .tratamiento-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .tratamiento-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tratamiento-card,
+.stat-card-tratamiento,
+.tratamientos-search {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+/* Estados de carga */
+.tratamientos-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tratamientos-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(233, 30, 99, 0.1);
+    border-top: 3px solid var(--color-primario);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

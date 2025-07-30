@@ -1,4 +1,4 @@
-/* ===================== PANTALLA DE LOGIN ===================== */
+/* ===================== PANTALLA DE LOGIN LIMPIA Y PROFESIONAL ===================== */
 
 .login-container {
     min-height: 100vh;
@@ -10,12 +10,12 @@
 }
 
 .login-card {
-    background: var(--bg-secundario);
+    background: white;
     padding: var(--espaciado-2xl);
     border-radius: var(--radio-borde-grande);
-    box-shadow: var(--sombra-intensa);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     width: 100%;
-    max-width: 520px;
+    max-width: 450px;
     animation: fadeInUp 0.6s ease-out;
     transition: all 0.3s ease;
 }
@@ -23,31 +23,77 @@
 .login-header {
     text-align: center;
     margin-bottom: var(--espaciado-xl);
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    padding: 2rem;
+    margin: -2rem -2rem 2rem -2rem;
+    border-radius: var(--radio-borde-grande) var(--radio-borde-grande) 0 0;
+    color: white;
 }
 
 .login-logo {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    margin: 0 auto var(--espaciado-lg);
+    margin: 0 auto 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .login-title {
-    color: var(--texto-principal);
-    margin-bottom: var(--espaciado-sm);
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .login-subtitle {
-    color: var(--texto-secundario);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 0.875rem;
     margin-bottom: 0;
+}
+
+/* Estilos para el formulario */
+.login-card .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-card .form-label {
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.login-card .form-input {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-card .form-input:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+.login-card .btn-primary {
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.login-card .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
 }
 
 /* Responsive para login */

@@ -12,10 +12,12 @@
 }
 
 .badge-primary {
-    background: rgba(37, 99, 235, 0.1);
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(240, 98, 146, 0.1) 100%);
     color: var(--color-primario);
     font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(233, 30, 99, 0.2);
+    border-radius: 20px;
 }
 
 .badge-success {

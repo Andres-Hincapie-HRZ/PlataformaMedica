@@ -14,7 +14,7 @@ class CalendarioManager {
         this.coloresCitas = {
             'pendiente': '#f59e0b',
             'confirmada': '#10b981',
-            'completada': '#3b82f6',
+            'completada': '#e91e63',
             'cancelada': '#ef4444',
             'urgente': '#dc2626'
         };
@@ -210,8 +210,15 @@ class CalendarioManager {
             let html = '';
             
             citasAMostrar.forEach(cita => {
-                const paciente = pacientes.find(p => p.id === cita.idPaciente);
-                const nombrePaciente = paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente';
+                let nombrePaciente = 'Paciente';
+                
+                if (cita.tipoPaciente === 'externo' && cita.pacienteExterno) {
+                    nombrePaciente = cita.pacienteExterno.nombre;
+                } else if (cita.idPaciente) {
+                    const paciente = pacientes.find(p => p.id === cita.idPaciente);
+                    nombrePaciente = paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente';
+                }
+                
                 const color = this.coloresCitas[cita.estado] || this.coloresCitas.pendiente;
                 
                 const fechaCita = cita.fechaCita.seconds ? 
@@ -340,8 +347,19 @@ class CalendarioManager {
 
     // Generar tarjeta de cita
     generarTarjetaCita(cita) {
-        const paciente = pacientes.find(p => p.id === cita.idPaciente);
-        const nombrePaciente = paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado';
+        let nombrePaciente = 'Paciente no encontrado';
+        let telefonoPaciente = '';
+        
+        if (cita.tipoPaciente === 'externo' && cita.pacienteExterno) {
+            nombrePaciente = cita.pacienteExterno.nombre;
+            telefonoPaciente = cita.pacienteExterno.telefono;
+        } else if (cita.idPaciente) {
+            const paciente = pacientes.find(p => p.id === cita.idPaciente);
+            if (paciente) {
+                nombrePaciente = `${paciente.nombre} ${paciente.apellido}`;
+                telefonoPaciente = paciente.telefono;
+            }
+        }
         
         const fechaCita = cita.fechaCita.seconds ? 
             new Date(cita.fechaCita.seconds * 1000) :
@@ -400,25 +418,62 @@ class CalendarioManager {
         const cita = this.citasDelMes.find(c => c.id === idCita);
         if (!cita) return;
         
-        const paciente = pacientes.find(p => p.id === cita.idPaciente);
+        let infoPaciente = '';
+        let tipoPacienteTexto = '';
+        
+        if (cita.tipoPaciente === 'externo' && cita.pacienteExterno) {
+            tipoPacienteTexto = 'Paciente Externo';
+            infoPaciente = `
+                <p><strong>Nombre:</strong> ${cita.pacienteExterno.nombre}</p>
+                <p><strong>Teléfono:</strong> ${cita.pacienteExterno.telefono}</p>
+                ${cita.pacienteExterno.cedula ? `<p><strong>Cédula:</strong> ${cita.pacienteExterno.cedula}</p>` : ''}
+                ${cita.pacienteExterno.email ? `<p><strong>Email:</strong> ${cita.pacienteExterno.email}</p>` : ''}
+            `;
+        } else if (cita.idPaciente) {
+            const paciente = pacientes.find(p => p.id === cita.idPaciente);
+            tipoPacienteTexto = 'Paciente Registrado';
+            if (paciente) {
+                infoPaciente = `
+                    <p><strong>Nombre:</strong> ${paciente.nombre} ${paciente.apellido}</p>
+                    <p><strong>Cédula:</strong> ${paciente.cedula}</p>
+                    <p><strong>Teléfono:</strong> ${paciente.telefono}</p>
+                    ${paciente.email ? `<p><strong>Email:</strong> ${paciente.email}</p>` : ''}
+                `;
+            } else {
+                infoPaciente = '<p><strong>Paciente:</strong> No encontrado</p>';
+            }
+        }
+        
         const fechaCita = cita.fechaCita.seconds ? 
             new Date(cita.fechaCita.seconds * 1000) :
             new Date(cita.fechaCita);
+        
+        const estadoClass = {
+            'pendiente': 'warning',
+            'confirmada': 'success',
+            'completada': 'primary',
+            'cancelada': 'error',
+            'urgente': 'error'
+        }[cita.estado] || 'secondary';
         
         const modalBody = `
             <div class="cita-detalle">
                 <div class="grid grid-2 gap-4">
                     <div>
                         <h4>Información del Paciente</h4>
-                        <p><strong>Nombre:</strong> ${paciente ? `${paciente.nombre} ${paciente.apellido}` : 'No encontrado'}</p>
-                        <p><strong>Cédula:</strong> ${paciente ? paciente.cedula : 'N/A'}</p>
-                        <p><strong>Teléfono:</strong> ${paciente ? paciente.telefono : 'N/A'}</p>
+                        <p><strong>Tipo:</strong> <span class="badge badge-secondary">${tipoPacienteTexto}</span></p>
+                        ${infoPaciente}
                     </div>
                     <div>
                         <h4>Información de la Cita</h4>
-                        <p><strong>Fecha:</strong> ${fechaCita.toLocaleDateString('es-ES')}</p>
+                        <p><strong>Fecha:</strong> ${fechaCita.toLocaleDateString('es-ES', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</p>
                         <p><strong>Hora:</strong> ${fechaCita.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}</p>
-                        <p><strong>Estado:</strong> <span class="badge badge-${cita.estado === 'pendiente' ? 'warning' : 'success'}">${cita.estado.toUpperCase()}</span></p>
+                        <p><strong>Estado:</strong> <span class="badge badge-${estadoClass}">${cita.estado.toUpperCase()}</span></p>
                     </div>
                 </div>
                 <div class="mt-4">
@@ -478,22 +533,57 @@ document.addEventListener('DOMContentLoaded', function() {
 window.abrirModalCita = function(fechaPreseleccionada = null) {
     const modalBody = `
         <form id="formCita">
+            <!-- Selector de tipo de paciente -->
+            <div class="form-group">
+                <label class="form-label">Tipo de Paciente</label>
+                <div class="flex gap-4">
+                    <label class="radio-option">
+                        <input type="radio" name="tipoPaciente" value="registrado" checked onchange="toggleTipoPaciente()">
+                        <span>Paciente Registrado</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipoPaciente" value="externo" onchange="toggleTipoPaciente()">
+                        <span>Paciente Externo</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Sección para paciente registrado -->
+            <div id="pacienteRegistrado" class="form-group">
+                <label class="form-label">Seleccionar Paciente</label>
+                <select name="idPaciente" class="form-select">
+                    <option value="">Seleccionar paciente registrado</option>
+                    ${pacientes.map(p => `<option value="${p.id}">${p.nombre} ${p.apellido} - ${p.cedula}</option>`).join('')}
+                </select>
+            </div>
+
+            <!-- Sección para paciente externo -->
+            <div id="pacienteExterno" class="hidden">
+                <div class="grid grid-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo *</label>
+                        <input type="text" name="nombreExterno" class="form-input" placeholder="Nombre y apellido">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono *</label>
+                        <input type="tel" name="telefonoExterno" class="form-input" placeholder="Número de contacto">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cédula/ID</label>
+                        <input type="text" name="cedulaExterno" class="form-input" placeholder="Documento de identidad">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="emailExterno" class="form-input" placeholder="Correo electrónico">
+                    </div>
+                </div>
+            </div>
+
             <div class="grid grid-2 gap-4">
                 <div class="form-group">
-                    <label class="form-label">Paciente</label>
-                    <select name="idPaciente" class="form-select" required>
-                        <option value="">Seleccionar paciente</option>
-                        ${pacientes.map(p => `<option value="${p.id}">${p.nombre} ${p.apellido}</option>`).join('')}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Fecha y Hora</label>
+                    <label class="form-label">Fecha y Hora *</label>
                     <input type="datetime-local" name="fechaCita" class="form-input cita-datetime" required 
                            ${fechaPreseleccionada ? `value="${fechaPreseleccionada}T09:00"` : ''}>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Motivo de la Cita</label>
-                    <input type="text" name="motivo" class="form-input" placeholder="Consulta general, revisión, etc." required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Estado</label>
@@ -504,9 +594,25 @@ window.abrirModalCita = function(fechaPreseleccionada = null) {
                     </select>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="form-label">Motivo de la Cita *</label>
+                <select name="motivo" class="form-select" required>
+                    <option value="">Seleccionar motivo</option>
+                    <option value="Consulta inicial">Consulta inicial</option>
+                    <option value="Evaluación pre-operatoria">Evaluación pre-operatoria</option>
+                    <option value="Control post-operatorio">Control post-operatorio</option>
+                    <option value="Consulta de seguimiento">Consulta de seguimiento</option>
+                    <option value="Revisión de resultados">Revisión de resultados</option>
+                    <option value="Consulta de segunda opinión">Consulta de segunda opinión</option>
+                    <option value="Tratamiento no quirúrgico">Tratamiento no quirúrgico</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            
             <div class="form-group">
                 <label class="form-label">Observaciones</label>
-                <textarea name="observaciones" class="form-textarea" placeholder="Observaciones adicionales (opcional)"></textarea>
+                <textarea name="observaciones" class="form-textarea" placeholder="Observaciones adicionales, detalles específicos del motivo, etc."></textarea>
             </div>
         </form>
     `;
@@ -518,7 +624,36 @@ window.abrirModalCita = function(fechaPreseleccionada = null) {
         </button>
     `;
 
-    abrirModal('Nueva Cita', modalBody, modalFooter, 'cita');
+    abrirModal('Nueva Cita - EVA Cirugía Corporal', modalBody, modalFooter, 'cita');
+};
+
+// Función para alternar entre tipo de paciente
+window.toggleTipoPaciente = function() {
+    const tipoPaciente = document.querySelector('input[name="tipoPaciente"]:checked').value;
+    const pacienteRegistrado = document.getElementById('pacienteRegistrado');
+    const pacienteExterno = document.getElementById('pacienteExterno');
+    
+    if (tipoPaciente === 'registrado') {
+        pacienteRegistrado.classList.remove('hidden');
+        pacienteExterno.classList.add('hidden');
+        
+        // Hacer requerido el select de paciente registrado
+        document.querySelector('select[name="idPaciente"]').required = true;
+        
+        // Quitar requerido de campos externos
+        document.querySelector('input[name="nombreExterno"]').required = false;
+        document.querySelector('input[name="telefonoExterno"]').required = false;
+    } else {
+        pacienteRegistrado.classList.add('hidden');
+        pacienteExterno.classList.remove('hidden');
+        
+        // Quitar requerido del select de paciente registrado
+        document.querySelector('select[name="idPaciente"]').required = false;
+        
+        // Hacer requeridos los campos externos
+        document.querySelector('input[name="nombreExterno"]').required = true;
+        document.querySelector('input[name="telefonoExterno"]').required = true;
+    }
 };
 
 // Función para guardar cita desde el calendario
@@ -528,6 +663,38 @@ window.guardarCitaCalendario = async function() {
     const datos = Object.fromEntries(formData);
     
     try {
+        // Validar campos requeridos según el tipo de paciente
+        const tipoPaciente = datos.tipoPaciente;
+        
+        if (tipoPaciente === 'registrado') {
+            if (!datos.idPaciente) {
+                mostrarToast('❌ Debe seleccionar un paciente registrado', 'error');
+                return;
+            }
+        } else if (tipoPaciente === 'externo') {
+            if (!datos.nombreExterno || !datos.telefonoExterno) {
+                mostrarToast('❌ Debe completar nombre y teléfono del paciente externo', 'error');
+                return;
+            }
+            
+            // Crear objeto de paciente externo
+            datos.pacienteExterno = {
+                nombre: datos.nombreExterno,
+                telefono: datos.telefonoExterno,
+                cedula: datos.cedulaExterno || '',
+                email: datos.emailExterno || ''
+            };
+            
+            // Limpiar campos individuales del paciente externo
+            delete datos.nombreExterno;
+            delete datos.telefonoExterno;
+            delete datos.cedulaExterno;
+            delete datos.emailExterno;
+            
+            // Limpiar idPaciente para pacientes externos
+            delete datos.idPaciente;
+        }
+        
         // Convertir fecha a Timestamp de Firebase
         datos.fechaCita = firebase.firestore.Timestamp.fromDate(new Date(datos.fechaCita));
         
@@ -544,7 +711,7 @@ window.guardarCitaCalendario = async function() {
         }
     } catch (error) {
         console.error('Error guardando cita:', error);
-        mostrarToast('❌ Error agendando cita', 'error');
+        mostrarToast('❌ Error agendando cita: ' + error.message, 'error');
     }
 };
 

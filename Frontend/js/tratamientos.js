@@ -6,22 +6,38 @@ class TratamientosManager {
         this.pacienteActual = null;
     }
 
+    // Inicializar el manager
+    async inicializar() {
+        console.log('Inicializando TratamientosManager...');
+        try {
+            await this.cargarTodos();
+            console.log('TratamientosManager inicializado correctamente');
+        } catch (error) {
+            console.error('Error inicializando TratamientosManager:', error);
+        }
+    }
+
     // Cargar todos los tratamientos
     async cargarTodos() {
         try {
             // Verificar que los pacientes estén cargados
             if (!window.pacientes || window.pacientes.length === 0) {
+                console.log('Cargando pacientes para tratamientos...');
                 await cargarPacientes();
             }
             
+            console.log('Cargando sección de tratamientos...');
             this.tratamientos = await Firebase.TratamientosService.obtenerTratamientos();
             this.pacienteActual = null;
             
+            // Si no hay tratamientos, generar algunos de demostración
             if (this.tratamientos.length === 0) {
-                this.mostrarVistaInicial();
-            } else {
-                this.mostrarTratamientos();
+                console.log('No hay tratamientos, generando datos de demostración...');
+                this.tratamientos = this.generarTratamientosDemo();
             }
+            
+            console.log('Sección de tratamientos cargada exitosamente');
+            this.mostrarTratamientos();
         } catch (error) {
             console.error('Error cargando tratamientos:', error);
             this.mostrarVistaInicial();
@@ -162,30 +178,42 @@ class TratamientosManager {
                     </button>
                 </div>
                 
-                <!-- Estadísticas -->
-                <div class="grid grid-4 gap-4 mb-6">
-                    <div class="card bg-blue-50 border-blue-200">
-                        <div class="card-body text-center">
-                            <div class="text-2xl font-bold text-blue-600">${estadisticas.total}</div>
-                            <div class="text-sm text-blue-700">Total Tratamientos</div>
+                <!-- Estadísticas mejoradas -->
+                <div class="tratamientos-stats-grid">
+                    <div class="stat-card-tratamiento">
+                        <div class="stat-icon-tratamiento">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-content-tratamiento">
+                            <h3>${estadisticas.total}</h3>
+                            <p>Total Tratamientos</p>
                         </div>
                     </div>
-                    <div class="card bg-green-50 border-green-200">
-                        <div class="card-body text-center">
-                            <div class="text-2xl font-bold text-green-600">${estadisticas.activos}</div>
-                            <div class="text-sm text-green-700">Activos</div>
+                    <div class="stat-card-tratamiento">
+                        <div class="stat-icon-tratamiento" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="stat-content-tratamiento">
+                            <h3>${estadisticas.activos}</h3>
+                            <p>Activos</p>
                         </div>
                     </div>
-                    <div class="card bg-yellow-50 border-yellow-200">
-                        <div class="card-body text-center">
-                            <div class="text-2xl font-bold text-yellow-600">${estadisticas.pendientes}</div>
-                            <div class="text-sm text-yellow-700">Pendientes</div>
+                    <div class="stat-card-tratamiento">
+                        <div class="stat-icon-tratamiento" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content-tratamiento">
+                            <h3>${estadisticas.pendientes}</h3>
+                            <p>Pendientes</p>
                         </div>
                     </div>
-                    <div class="card bg-gray-50 border-gray-200">
-                        <div class="card-body text-center">
-                            <div class="text-2xl font-bold text-gray-600">${estadisticas.finalizados}</div>
-                            <div class="text-sm text-gray-700">Finalizados</div>
+                    <div class="stat-card-tratamiento">
+                        <div class="stat-icon-tratamiento" style="background: linear-gradient(135deg, #64748b, #475569);">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="stat-content-tratamiento">
+                            <h3>${estadisticas.finalizados}</h3>
+                            <p>Finalizados</p>
                         </div>
                     </div>
                 </div>
@@ -196,16 +224,16 @@ class TratamientosManager {
                         <div class="flex gap-4 items-center">
                             <div class="flex-1">
                                 <input type="text" id="filtroTratamientos" placeholder="Buscar tratamientos..." 
-                                       class="form-control" onkeyup="tratamientosManager.filtrarTratamientos()">
+                                       class="form-input" onkeyup="tratamientosManager.filtrarTratamientos()">
                             </div>
-                            <select id="filtroEstado" class="form-control w-48" onchange="tratamientosManager.filtrarTratamientos()">
+                            <select id="filtroEstado" class="form-select w-48" onchange="tratamientosManager.filtrarTratamientos()">
                                 <option value="">Todos los estados</option>
                                 <option value="activo">Activos</option>
                                 <option value="pendiente">Pendientes</option>
                                 <option value="pausado">Pausados</option>
                                 <option value="finalizado">Finalizados</option>
                             </select>
-                            <select id="filtroTipo" class="form-control w-48" onchange="tratamientosManager.filtrarTratamientos()">
+                            <select id="filtroTipo" class="form-select w-48" onchange="tratamientosManager.filtrarTratamientos()">
                                 <option value="">Todos los tipos</option>
                                 <option value="Farmacológico">Farmacológico</option>
                                 <option value="Fisioterapia">Fisioterapia</option>
@@ -376,68 +404,95 @@ class TratamientosManager {
 
     // Crear tarjeta individual de tratamiento
     crearTarjetaTratamiento(tratamiento) {
+        // Validar y limpiar datos para evitar undefined
         const fechaInicio = tratamiento.fechaInicio ? 
             new Date(tratamiento.fechaInicio.seconds * 1000).toLocaleDateString() : 
             'No especificada';
         
-        const estadoClass = this.obtenerClaseEstado(tratamiento.estado);
-        const estadoTexto = this.obtenerTextoEstado(tratamiento.estado);
-        const iconoTipo = this.obtenerIconoTipo(tratamiento.tipo);
+        const estadoClass = this.obtenerClaseEstado(tratamiento.estado || 'pendiente');
+        const estadoTexto = this.obtenerTextoEstado(tratamiento.estado || 'pendiente');
+        const iconoTipo = this.obtenerIconoTipo(tratamiento.tipo || 'Farmacológico');
+        
+        // Limpiar datos para evitar undefined y obtener nombre real del paciente
+        const nombre = tratamiento.nombre || 'Tratamiento sin nombre';
+        
+        // Buscar el nombre real del paciente
+        let pacienteNombre = 'Paciente no especificado';
+        if (tratamiento.idPaciente && window.pacientes) {
+            const paciente = window.pacientes.find(p => p.id === tratamiento.idPaciente);
+            if (paciente) {
+                pacienteNombre = `${paciente.nombre} ${paciente.apellido}`;
+            }
+        } else if (tratamiento.pacienteNombre) {
+            pacienteNombre = tratamiento.pacienteNombre;
+        }
+        
+        const tipo = tratamiento.tipo || 'No especificado';
+        const duracion = tratamiento.duracion || 'No especificada';
+        const unidadDuracion = tratamiento.unidadDuracion || '';
+        const frecuencia = tratamiento.frecuencia || 'No especificada';
+        const descripcion = tratamiento.descripcion || '';
+        const medicamentos = tratamiento.medicamentos || '';
+        const dosis = tratamiento.dosis || '';
         
         return `
-            <div class="card hover:shadow-lg transition-shadow duration-200">
-                <div class="card-body">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                                <i class="${iconoTipo} text-blue-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-lg text-gray-800">${tratamiento.nombre}</h3>
-                                <p class="text-sm text-gray-600">
-                                    <i class="fas fa-user mr-1"></i>
-                                    ${tratamiento.pacienteNombre}
-                                </p>
-                            </div>
-                        </div>
-                        <span class="badge ${estadoClass}">${estadoTexto}</span>
-                    </div>
-                    
-                    <div class="grid grid-2 gap-4 mb-4">
-                        <div>
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Tipo</label>
-                            <p class="text-sm font-medium text-gray-800">${tratamiento.tipo}</p>
+            <div class="tratamiento-card">
+                <div class="tratamiento-header">
+                    <div class="flex items-center gap-3">
+                        <div class="tratamiento-stat-icon">
+                            <i class="${iconoTipo}"></i>
                         </div>
                         <div>
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Fecha Inicio</label>
-                            <p class="text-sm font-medium text-gray-800">${fechaInicio}</p>
-                        </div>
-                        <div>
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Duración</label>
-                            <p class="text-sm font-medium text-gray-800">${tratamiento.duracion} ${tratamiento.unidadDuracion}</p>
-                        </div>
-                        <div>
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Frecuencia</label>
-                            <p class="text-sm font-medium text-gray-800">${tratamiento.frecuencia || 'No especificada'}</p>
-                        </div>
-                    </div>
-                    
-                    ${tratamiento.descripcion ? `
-                        <div class="mb-4">
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Descripción</label>
-                            <p class="text-sm text-gray-700 mt-1">${tratamiento.descripcion}</p>
-                        </div>
-                    ` : ''}
-                    
-                    ${tratamiento.medicamentos ? `
-                        <div class="mb-4">
-                            <label class="text-xs font-medium text-gray-500 uppercase tracking-wide">Medicamentos</label>
-                            <p class="text-sm text-gray-700 mt-1">
-                                <i class="fas fa-pills text-blue-500 mr-1"></i>
-                                ${tratamiento.medicamentos} ${tratamiento.dosis ? `- ${tratamiento.dosis}` : ''}
+                            <h3 class="tratamiento-title">${nombre}</h3>
+                            <p class="tratamiento-paciente">
+                                <i class="fas fa-user mr-1"></i>
+                                ${pacienteNombre}
                             </p>
                         </div>
-                    ` : ''}
+                    </div>
+                    <span class="tratamiento-estado ${tratamiento.estado || 'pendiente'}">${estadoTexto}</span>
+                </div>
+                
+                <div class="tratamiento-info">
+                    <div class="info-item">
+                        <label class="info-label">Tipo</label>
+                        <p class="info-value">${tipo}</p>
+                    </div>
+                    <div class="info-item">
+                        <label class="info-label">Fecha Inicio</label>
+                        <p class="info-value">${fechaInicio}</p>
+                    </div>
+                    <div class="info-item">
+                        <label class="info-label">Duración</label>
+                        <p class="info-value">${duracion} ${unidadDuracion}</p>
+                    </div>
+                    <div class="info-item">
+                        <label class="info-label">Frecuencia</label>
+                        <p class="info-value">${frecuencia}</p>
+                    </div>
+                </div>
+                
+                ${descripcion ? `
+                    <div class="mb-4">
+                        <label class="info-label">Descripción</label>
+                        <p class="info-value">${descripcion}</p>
+                    </div>
+                ` : ''}
+                
+                ${medicamentos ? `
+                    <div class="medicamentos-section">
+                        <h4>Medicamentos</h4>
+                        <div class="medicamento-item">
+                            <div class="medicamento-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="medicamento-info">
+                                <p class="medicamento-nombre">${medicamentos}</p>
+                                ${dosis ? `<p class="medicamento-dosis">${dosis}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
                     
                     <div class="flex justify-between items-center pt-4 border-t border-gray-200">
                         <div class="flex gap-2">
@@ -780,5 +835,127 @@ class TratamientosManager {
 
     finalizarTratamiento(id) {
         this.cambiarEstadoTratamiento(id, 'finalizado');
+    }
+
+    // Ver detalles del tratamiento (función que faltaba para el botón del ojito)
+    verDetalles(id) {
+        const tratamiento = this.tratamientos.find(t => t.id === id);
+        if (!tratamiento) {
+            mostrarToast('Tratamiento no encontrado', 'error');
+            return;
+        }
+
+        // Buscar el nombre real del paciente
+        let pacienteNombre = 'Paciente no especificado';
+        if (tratamiento.idPaciente && window.pacientes) {
+            const paciente = window.pacientes.find(p => p.id === tratamiento.idPaciente);
+            if (paciente) {
+                pacienteNombre = `${paciente.nombre} ${paciente.apellido}`;
+            }
+        } else if (tratamiento.pacienteNombre) {
+            pacienteNombre = tratamiento.pacienteNombre;
+        }
+
+        const fechaInicio = tratamiento.fechaInicio ? 
+            new Date(tratamiento.fechaInicio.seconds * 1000).toLocaleDateString() : 
+            'No especificada';
+
+        const fechaFin = tratamiento.fechaFin ? 
+            new Date(tratamiento.fechaFin.seconds * 1000).toLocaleDateString() : 
+            'No especificada';
+
+        const modalBody = `
+            <div class="tratamiento-detalles">
+                <div class="grid grid-2 gap-6">
+                    <div class="detalle-seccion">
+                        <h4><i class="fas fa-info-circle text-blue-500 mr-2"></i>Información General</h4>
+                        <div class="detalle-item">
+                            <strong>Nombre del Tratamiento:</strong>
+                            <p>${tratamiento.nombre || 'No especificado'}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Paciente:</strong>
+                            <p>${pacienteNombre}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Tipo:</strong>
+                            <p>${tratamiento.tipo || 'No especificado'}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Estado:</strong>
+                            <p><span class="tratamiento-estado ${tratamiento.estado || 'pendiente'}">${this.obtenerTextoEstado(tratamiento.estado || 'pendiente')}</span></p>
+                        </div>
+                    </div>
+
+                    <div class="detalle-seccion">
+                        <h4><i class="fas fa-calendar text-green-500 mr-2"></i>Fechas y Duración</h4>
+                        <div class="detalle-item">
+                            <strong>Fecha de Inicio:</strong>
+                            <p>${fechaInicio}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Duración:</strong>
+                            <p>${tratamiento.duracion || 'No especificada'} ${tratamiento.unidadDuracion || ''}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Frecuencia:</strong>
+                            <p>${tratamiento.frecuencia || 'No especificada'}</p>
+                        </div>
+                        <div class="detalle-item">
+                            <strong>Fecha Estimada de Fin:</strong>
+                            <p>${fechaFin}</p>
+                        </div>
+                    </div>
+                </div>
+
+                ${tratamiento.descripcion ? `
+                    <div class="detalle-seccion mt-6">
+                        <h4><i class="fas fa-file-alt text-purple-500 mr-2"></i>Descripción</h4>
+                        <div class="detalle-item">
+                            <p>${tratamiento.descripcion}</p>
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${tratamiento.medicamentos ? `
+                    <div class="detalle-seccion mt-6">
+                        <h4><i class="fas fa-pills text-red-500 mr-2"></i>Medicamentos</h4>
+                        <div class="medicamentos-section">
+                            <div class="medicamento-item">
+                                <div class="medicamento-icon">
+                                    <i class="fas fa-pills"></i>
+                                </div>
+                                <div class="medicamento-info">
+                                    <p class="medicamento-nombre">${tratamiento.medicamentos}</p>
+                                    ${tratamiento.dosis ? `<p class="medicamento-dosis">Dosis: ${tratamiento.dosis}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${tratamiento.observaciones ? `
+                    <div class="detalle-seccion mt-6">
+                        <h4><i class="fas fa-sticky-note text-orange-500 mr-2"></i>Observaciones</h4>
+                        <div class="detalle-item">
+                            <p>${tratamiento.observaciones}</p>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
+        const modalFooter = `
+            <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cerrar</button>
+            <button type="button" class="btn btn-primary" onclick="tratamientosManager.editarTratamiento('${id}')">
+                <i class="fas fa-edit"></i> Editar Tratamiento
+            </button>
+        `;
+
+        abrirModal(
+            '<i class="fas fa-eye mr-2"></i>Detalles del Tratamiento',
+            modalBody,
+            modalFooter
+        );
     }
 }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma Médica - Sistema de Gestión</title>
+    <title>EVA Cirugía Corporal - Sistema de Gestión</title>
     <!-- Archivos CSS separados por sección -->
     <link rel="stylesheet" href="Frontend/css/base.css">
     <link rel="stylesheet" href="Frontend/css/login.css">
@@ -25,6 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <!-- PANTALLA DE LOGIN -->
     <div id="loginScreen" class="login-container">
@@ -33,10 +35,10 @@
                 <div class="login-logo">
                     <i class="fas fa-user-md"></i>
                 </div>
-                <h1 class="login-title">Plataforma Médica</h1>
-                <p class="login-subtitle">Sistema de Gestión de Pacientes y Cirugías</p>
+                <h1 class="login-title">EVA Cirugía Corporal</h1>
+                <p class="login-subtitle">Sistema de Gestión de Pacientes y Cirugías Estéticas</p>
             </div>
-            
+
             <!-- Formulario de Login -->
             <form id="loginForm" class="login-form">
                 <div class="form-group">
@@ -44,13 +46,13 @@
                     <input type="email" id="email" class="form-input" placeholder="doctor@clinica.com" required>
                     <span class="form-error" id="emailError"></span>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" id="password" class="form-input" placeholder="••••••••" required>
                     <span class="form-error" id="passwordError"></span>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary btn-full btn-lg">
                     <span id="loginBtnText">Iniciar Sesión</span>
                     <div id="loginSpinner" class="loading-spinner hidden"></div>
@@ -71,7 +73,7 @@
                         <span class="form-error" id="regEmailError"></span>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="regTipoDoctor" class="form-label">Especialidad/Tipo</label>
                     <select id="regTipoDoctor" class="form-select" required>
@@ -88,16 +90,18 @@
                     </select>
                     <span class="form-error" id="regTipoDoctorError"></span>
                 </div>
-                
+
                 <div class="grid grid-2 gap-4">
                     <div class="form-group">
                         <label for="regPassword" class="form-label">Contraseña</label>
-                        <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                        <input type="password" id="regPassword" class="form-input" placeholder="••••••••" required
+                            minlength="6">
                         <span class="form-error" id="regPasswordError"></span>
                     </div>
                     <div class="form-group">
                         <label for="regConfirmPassword" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                        <input type="password" id="regConfirmPassword" class="form-input" placeholder="••••••••"
+                            required minlength="6">
                         <span class="form-error" id="regConfirmPasswordError"></span>
                     </div>
                 </div>
@@ -110,13 +114,13 @@
                         Seleccionar Foto
                     </label>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary btn-full btn-lg">
                     <span id="registerBtnText">Registrarse</span>
                     <div id="registerSpinner" class="loading-spinner hidden"></div>
                 </button>
             </form>
-            
+
             <!-- Botones de cambio -->
             <div class="text-center mt-4">
                 <button id="showRegisterBtn" class="btn btn-secondary btn-sm">
@@ -126,7 +130,7 @@
                     ¿Ya tienes cuenta? Inicia Sesión
                 </button>
             </div>
-            
+
             <div id="loginError" class="form-error text-center mt-3 hidden"></div>
             <div id="registerSuccess" class="text-center mt-3 hidden" style="color: #16a34a; font-size: 0.875rem;">
                 ¡Registro exitoso! Tu cuenta será activada por un administrador.
@@ -143,10 +147,10 @@
                     <i class="fas fa-user-md"></i>
                 </div>
                 <div>
-                    <h2 class="sidebar-title">MediPlatform</h2>
+                    <h2 class="sidebar-title">EVA Cirugía</h2>
                 </div>
             </div>
-            
+
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
                     <a href="#" class="sidebar-nav-link active" data-section="dashboard">
@@ -209,7 +213,7 @@
                         <span id="currentUser" class="badge badge-primary"></span>
                     </div>
                 </div>
-                
+
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon primary">
@@ -220,7 +224,7 @@
                             <p>Total Pacientes</p>
                         </div>
                     </div>
-                    
+
                     <div class="stat-card">
                         <div class="stat-icon success">
                             <i class="fas fa-cut"></i>
@@ -230,7 +234,7 @@
                             <p>Cirugías Realizadas</p>
                         </div>
                     </div>
-                    
+
                     <div class="stat-card">
                         <div class="stat-icon warning">
                             <i class="fas fa-calendar-check"></i>
@@ -240,7 +244,7 @@
                             <p>Citas Hoy</p>
                         </div>
                     </div>
-                    
+
                     <div class="stat-card">
                         <div class="stat-icon error">
                             <i class="fas fa-clock"></i>
@@ -261,7 +265,7 @@
                             <div id="citasRecientes"></div>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Cirugías por Tipo</h3>
@@ -284,7 +288,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Lista de Pacientes</h3>
@@ -317,7 +321,7 @@
                 <div class="content-header">
                     <h1 class="content-title">Historias Clínicas</h1>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-body">
                         <div id="historiasLista"></div>
@@ -341,7 +345,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="grid grid-2">
                     <div class="card">
                         <div class="card-header">
@@ -351,7 +355,7 @@
                             <div id="calendario"></div>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Citas del Día</h3>
@@ -383,7 +387,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Usuarios Administradores</h3>
@@ -437,7 +441,7 @@
     <!-- SCRIPTS FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-    
+
     <!-- SCRIPTS DE LA APLICACIÓN -->
     <script src="Backend/Config.js"></script>
     <script src="Frontend/js/General.js"></script>
@@ -446,4 +450,5 @@
     <script src="Frontend/js/calendario.js"></script>
     <script src="Frontend/js/cirugias.js"></script>
 </body>
+
 </html>

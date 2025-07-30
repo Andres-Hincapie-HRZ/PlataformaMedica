@@ -483,6 +483,7 @@ function mostrarCirugiasPorTipo() {
 async function cargarPacientes() {
     try {
         pacientes = await Firebase.PacientesService.obtenerPacientes();
+        window.pacientes = pacientes; // Asignar a window.pacientes para que esté disponible globalmente
         mostrarTablaPacientes();
     } catch (error) {
         console.error('Error cargando pacientes:', error);
@@ -1045,6 +1046,7 @@ async function cargarTratamientos() {
         // Inicializar el manager de tratamientos si no existe
         if (!window.tratamientosManager) {
             window.tratamientosManager = new TratamientosManager();
+            await window.tratamientosManager.inicializar();
         }
         
         // Asegurar que los pacientes estén cargados
@@ -1082,7 +1084,7 @@ function abrirModalTratamiento() {
 // ===================== FUNCIONES AUXILIARES =====================
 
 function abrirModal(titulo, cuerpo, pie, tipoModal = '') {
-    document.getElementById('modalTitle').textContent = titulo;
+    document.getElementById('modalTitle').innerHTML = titulo;
     document.getElementById('modalBody').innerHTML = cuerpo;
     document.getElementById('modalFooter').innerHTML = pie;
     
@@ -1145,7 +1147,6 @@ window.verHistoriaPaciente = function(id) {
 window.guardarPaciente = guardarPaciente;
 window.guardarUsuario = guardarUsuario;
 window.guardarCita = guardarCita;
-window.guardarCirugia = guardarCirugia;
 window.cambiarEstadoUsuario = cambiarEstadoUsuario;
 window.cerrarModal = cerrarModal;
 
