@@ -903,6 +903,57 @@ class CirugiasManager {
                         </select>
                     </div>
                 </div>
+                
+                <!-- Sección de Equipo Quirúrgico -->
+                <div class="form-group mt-4">
+                    <h4 class="text-lg font-semibold mb-3 text-indigo-600">
+                        <i class="fas fa-users mr-2"></i>Equipo Quirúrgico
+                    </h4>
+                </div>
+                
+                <div class="grid grid-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-syringe text-red-500 mr-2"></i>Anestesiólogo
+                        </label>
+                        <input type="text" name="anestesiologo" class="form-input" 
+                               placeholder="Nombre del anestesiólogo"
+                               value="${(cirugia && cirugia.anestesiologo) || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user-nurse text-blue-500 mr-2"></i>Instrumentista
+                        </label>
+                        <input type="text" name="instrumentista" class="form-input" 
+                               placeholder="Nombre del instrumentista"
+                               value="${(cirugia && cirugia.instrumentista) || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user-nurse text-teal-500 mr-2"></i>Enfermera Circulante
+                        </label>
+                        <input type="text" name="enfermeraCirculante" class="form-input" 
+                               placeholder="Nombre de la enfermera circulante"
+                               value="${(cirugia && cirugia.enfermeraCirculante) || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user-md text-purple-500 mr-2"></i>Cirujano Asistente
+                        </label>
+                        <input type="text" name="cirujanoAsistente" class="form-input" 
+                               placeholder="Nombre del cirujano asistente"
+                               value="${(cirugia && cirugia.cirujanoAsistente) || ''}">
+                    </div>
+                </div>
+                
+                <!-- Campo para otros miembros del equipo -->
+                <div class="form-group mt-4">
+                    <label class="form-label">
+                        <i class="fas fa-users text-indigo-500 mr-2"></i>Otros Miembros del Equipo
+                    </label>
+                    <textarea name="equipoAdicional" class="form-textarea" rows="3" 
+                              placeholder="Escriba otros miembros del equipo quirúrgico (ej: Técnico en Anestesia, Auxiliares de Enfermería, etc.)">${(cirugia && cirugia.equipoAdicional) || ''}</textarea>
+                </div>
                 <div class="form-group mt-4">
                     <label class="form-label">
                         <i class="fas fa-notes-medical text-gray-500 mr-2"></i>Descripción y Notas
@@ -1024,6 +1075,47 @@ class CirugiasManager {
                         </div>
                     </div>
                 </div>
+                
+                <!-- Sección de Equipo Quirúrgico -->
+                ${(cirugia.anestesiologo || cirugia.instrumentista || cirugia.enfermeraCirculante || cirugia.cirujanoAsistente || cirugia.equipoAdicional) ? `
+                    <div class="detalle-seccion mt-6">
+                        <h4 class="text-lg font-semibold mb-4 text-indigo-600">
+                            <i class="fas fa-users mr-2"></i>Equipo Quirúrgico
+                        </h4>
+                        <div class="grid grid-2 gap-4">
+                            ${cirugia.anestesiologo ? `
+                                <div class="detalle-item">
+                                    <strong><i class="fas fa-syringe text-red-500 mr-2"></i>Anestesiólogo:</strong>
+                                    <p>${cirugia.anestesiologo}</p>
+                                </div>
+                            ` : ''}
+                            ${cirugia.instrumentista ? `
+                                <div class="detalle-item">
+                                    <strong><i class="fas fa-user-nurse text-blue-500 mr-2"></i>Instrumentista:</strong>
+                                    <p>${cirugia.instrumentista}</p>
+                                </div>
+                            ` : ''}
+                            ${cirugia.enfermeraCirculante ? `
+                                <div class="detalle-item">
+                                    <strong><i class="fas fa-user-nurse text-teal-500 mr-2"></i>Enfermera Circulante:</strong>
+                                    <p>${cirugia.enfermeraCirculante}</p>
+                                </div>
+                            ` : ''}
+                            ${cirugia.cirujanoAsistente ? `
+                                <div class="detalle-item">
+                                    <strong><i class="fas fa-user-md text-purple-500 mr-2"></i>Cirujano Asistente:</strong>
+                                    <p>${cirugia.cirujanoAsistente}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                        ${cirugia.equipoAdicional ? `
+                            <div class="detalle-item mt-4">
+                                <strong><i class="fas fa-users text-indigo-500 mr-2"></i>Otros Miembros del Equipo:</strong>
+                                <p class="bg-gray-50 p-3 rounded-lg mt-2">${cirugia.equipoAdicional}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
                 
                 ${cirugia.descripcion ? `
                     <div class="detalle-seccion mt-6">
