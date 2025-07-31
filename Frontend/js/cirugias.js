@@ -26,6 +26,31 @@ class CirugiasManager {
             'Mastoplastía de Aumento',
             'Frontoplastía'
         ];
+
+        // Tipos de implantes disponibles
+        this.tiposImplantes = [
+            'Silicona',
+            'Solución Salina',
+            'Gel Cohesivo',
+            'Poliuretano',
+            'Hidrogel',
+            'Sin Implante'
+        ];
+
+        // Tamaños de implantes disponibles
+        this.tamañosImplantes = [
+            '100-200cc',
+            '200-300cc',
+            '300-400cc',
+            '400-500cc',
+            '500-600cc',
+            '600cc+',
+            'No Aplica'
+        ];
+
+        // Filtros adicionales
+        this.tipoImplanteFiltro = '';
+        this.tamañoImplanteFiltro = '';
     }
 
     // Inicializar el manager
@@ -95,7 +120,7 @@ class CirugiasManager {
 
                 <!-- Filtros -->
                 <div class="filtros-cirugias card p-4 mb-4">
-                    <div class="grid grid-4 gap-4">
+                    <div class="grid grid-6 gap-4">
                         <div class="form-group">
                             <label class="form-label">Filtrar por Tipo</label>
                             <select id="filtroTipo" class="form-select" onchange="cirugiasManager.aplicarFiltros()">
@@ -111,6 +136,24 @@ class CirugiasManager {
                                 <option value="">Todos los cirujanos</option>
                                 ${this.cirujanos.map(cirujano => `
                                     <option value="${cirujano.id}" ${this.cirujanoFiltro === cirujano.id ? 'selected' : ''}>${cirujano.nombre}</option>
+                                `).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Implante</label>
+                            <select id="filtroTipoImplante" class="form-select" onchange="cirugiasManager.aplicarFiltros()">
+                                <option value="">Todos los implantes</option>
+                                ${this.tiposImplantes.map(tipo => `
+                                    <option value="${tipo}" ${this.tipoImplanteFiltro === tipo ? 'selected' : ''}>${tipo}</option>
+                                `).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tamaño de Implante</label>
+                            <select id="filtroTamañoImplante" class="form-select" onchange="cirugiasManager.aplicarFiltros()">
+                                <option value="">Todos los tamaños</option>
+                                ${this.tamañosImplantes.map(tamaño => `
+                                    <option value="${tamaño}" ${this.tamañoImplanteFiltro === tamaño ? 'selected' : ''}>${tamaño}</option>
                                 `).join('')}
                             </select>
                         </div>
@@ -242,6 +285,8 @@ class CirugiasManager {
                                 <tr>
                                     <th>Paciente</th>
                                     <th>Tipo de Cirugía</th>
+                                    <th>Tipo de Implante</th>
+                                    <th>Tamaño</th>
                                     <th>Cirujano</th>
                                     <th>Fecha Programada</th>
                                     <th>Duración</th>
@@ -290,6 +335,12 @@ class CirugiasManager {
                 </td>
                 <td>
                     <span class="cirugia-tipo">${cirugia.tipo}</span>
+                </td>
+                <td>
+                    <span class="badge badge-info">${cirugia.tipoImplante || 'No especificado'}</span>
+                </td>
+                <td>
+                    <span class="badge badge-secondary">${cirugia.tamañoImplante || 'No especificado'}</span>
                 </td>
                 <td>
                     <div class="flex items-center">
@@ -505,6 +556,16 @@ class CirugiasManager {
                 return false;
             }
 
+            // Filtro por tipo de implante
+            if (this.tipoImplanteFiltro && cirugia.tipoImplante !== this.tipoImplanteFiltro) {
+                return false;
+            }
+
+            // Filtro por tamaño de implante
+            if (this.tamañoImplanteFiltro && cirugia.tamañoImplante !== this.tamañoImplanteFiltro) {
+                return false;
+            }
+
             // Filtro por mes (si está en vista de calendario o se especifica)
             const filtroMes = document.getElementById('filtroMes')?.value;
             if (filtroMes) {
@@ -526,6 +587,8 @@ class CirugiasManager {
     aplicarFiltros() {
         this.tipoFiltro = document.getElementById('filtroTipo')?.value || '';
         this.cirujanoFiltro = document.getElementById('filtroCirujano')?.value || '';
+        this.tipoImplanteFiltro = document.getElementById('filtroTipoImplante')?.value || '';
+        this.tamañoImplanteFiltro = document.getElementById('filtroTamañoImplante')?.value || '';
         
         const filtroMes = document.getElementById('filtroMes')?.value;
         if (filtroMes) {
@@ -540,6 +603,8 @@ class CirugiasManager {
     limpiarFiltros() {
         this.tipoFiltro = '';
         this.cirujanoFiltro = '';
+        this.tipoImplanteFiltro = '';
+        this.tamañoImplanteFiltro = '';
         this.fechaSeleccionada = new Date();
         this.mostrarInterfaz();
     }
