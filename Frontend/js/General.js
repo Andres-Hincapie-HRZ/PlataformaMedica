@@ -441,7 +441,7 @@ function mostrarCitasRecientes() {
         return `
             <div class="flex items-center justify-between mb-3 p-3 bg-gray-50 rounded">
                 <div>
-                    <strong>${paciente ? paciente.nombre : 'Paciente no encontrado'}</strong>
+                    <strong>${paciente ? paciente.nombre : 'Paciente Externo'}</strong>
                     <p class="text-sm text-gray-600">${cita.motivo}</p>
                 </div>
                 <div class="text-right">
@@ -974,7 +974,7 @@ function mostrarCitasDelDia() {
                 <div class="card-body">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h5>${paciente ? paciente.nombre + ' ' + paciente.apellido : 'Paciente no encontrado'}</h5>
+                            <h5>${paciente ? paciente.nombre + ' ' + paciente.apellido : 'Paciente Externo'}</h5>
                             <p><strong>Hora:</strong> ${hora}</p>
                             <p><strong>Motivo:</strong> ${cita.motivo}</p>
                             <span class="badge badge-${cita.estado === 'pendiente' ? 'warning' : 'success'}">${cita.estado}</span>

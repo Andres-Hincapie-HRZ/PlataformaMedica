@@ -1584,7 +1584,7 @@ HistoriasClinicasManager.prototype.cargarHistoriasPacienteMejorado = async funct
         // Buscar el paciente
         this.pacienteActual = pacientes.find(p => p.id === idPaciente);
         if (!this.pacienteActual) {
-            throw new Error('Paciente no encontrado');
+            throw new Error('Paciente Externo');
         }
 
         // Cargar historias

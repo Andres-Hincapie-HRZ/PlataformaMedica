@@ -328,7 +328,7 @@ class CirugiasManager {
                              alt="${paciente?.nombre || 'Paciente'}" 
                              class="w-8 h-8 rounded-full mr-3">
                         <div>
-                            <div class="font-medium">${paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado'}</div>
+                            <div class="font-medium">${paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente Externo'}</div>
                             <div class="text-sm text-gray-500">${paciente?.cedula || ''}</div>
                         </div>
                     </div>
@@ -728,7 +728,7 @@ class CirugiasManager {
         // Asegurar que pacientes esté definido y sea un array
         const pacientesDisponibles = Array.isArray(pacientes) ? pacientes : [];
         const paciente = pacientesDisponibles.find(p => p && p.id === idPaciente);
-        return paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado';
+        return paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente Externo';
     }
 
     // Obtener nombre del cirujano
@@ -1057,7 +1057,7 @@ class CirugiasManager {
                                 <img src="${paciente?.fotoUrl || '/api/placeholder/40/40'}" 
                                      class="w-10 h-10 rounded-full mr-3">
                                 <div>
-                                    <p class="font-medium">${paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado'}</p>
+                                    <p class="font-medium">${paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente Externo'}</p>
                                     <p class="text-sm text-gray-600">${paciente?.cedula || ''}</p>
                                 </div>
                             </div>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Modal Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            margin: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .success {
+            background: #28a745;
+        }
+
+        .success:hover {
+            background: #218838;
+        }
+
+        .info {
+            background: #17a2b8;
+        }
+
+        .info:hover {
+            background: #138496;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Prueba Modal de Email</h1>
+
+        <div class="test-section">
+            <h3>Probar Modal de Email para Citas:</h3>
+            <p>Haz clic en el botón para probar el modal de confirmación de email:</p>
+            <button class="btn success" onclick="probarModalEmailCita()">🪟 Probar Modal de Email</button>
+        </div>
+
+        <div class="test-section">
+            <h3>Probar Email Directo:</h3>
+            <p>Enviar email directamente sin modal:</p>
+            <button class="btn info" onclick="probarEmailDirecto()">📧 Enviar Email Directo</button>
+        </div>
+
+        <div id="resultado" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none;"></div>
+    </div>
+
+    <!-- EMAILJS SCRIPT -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- NUESTRO MODAL DE EMAIL -->
+    <script src="Frontend/js/email-modal.js"></script>
+
+    <!-- SCRIPT DE PRUEBA -->
+    <script>
+        // Función para probar el modal de email
+        function probarModalEmailCita() {
+            console.log('🧪 Iniciando prueba del modal de email...');
+
+            const datosPrueba = {
+                nombre: 'PEPITO',
+                email: 'jorge777andres@gmail.com',
+                fecha: '2024-08-08',
+                hora: '12:59',
+                doctor: 'Andres Hincapie',
+                especialidad: 'Médico General'
+            };
+
+            console.log('📧 Datos de prueba:', datosPrueba);
+
+            // Llamar a la función del modal
+            if (typeof window.mostrarModalEmailCita === 'function') {
+                window.mostrarModalEmailCita(datosPrueba);
+                mostrarResultado('✅ Modal mostrado correctamente', 'success');
+            } else {
+                mostrarResultado('❌ Error: Función mostrarModalEmailCita no disponible', 'error');
+            }
+        }
+
+        // Función para probar email directo
+        async function probarEmailDirecto() {
+            mostrarResultado('⏳ Enviando email directo...', 'info');
+
+            try {
+                // Inicializar EmailJS
+                emailjs.init('tfi1ksSYUgEyQxZ6I');
+
+                const templateParams = {
+                    to_email: 'jorge777andres@gmail.com',
+                    to_name: 'PEPITO',
+                    fecha_cita: 'viernes, 8 de agosto de 2024',
+                    hora_cita: '12:59',
+                    doctor: 'Andres Hincapie',
+                    especialidad: 'Médico General',
+                    clinica_nombre: 'EVA Cirugía Corporal',
+                    clinica_direccion: 'Avenida Roosevelt #26-61',
+                    clinica_telefono: '+57 318 8042578'
+                };
+
+                const response = await emailjs.send(
+                    'service_2re2org',
+                    'template_rxar2ok',
+                    templateParams,
+                    'tfi1ksSYUgEyQxZ6I'
+                );
+
+                console.log('✅ Email enviado:', response);
+                mostrarResultado('✅ Email directo enviado exitosamente!', 'success');
+
+            } catch (error) {
+                console.error('❌ Error:', error);
+                mostrarResultado(`❌ Error enviando email directo: ${error.text || error.message}`, 'error');
+            }
+        }
+
+        // Función para mostrar resultados
+        function mostrarResultado(mensaje, tipo) {
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = mensaje;
+            resultado.style.display = 'block';
+
+            if (tipo === 'success') {
+                resultado.style.backgroundColor = '#d4edda';
+                resultado.style.color = '#155724';
+                resultado.style.border = '1px solid #c3e6cb';
+            } else if (tipo === 'error') {
+                resultado.style.backgroundColor = '#f8d7da';
+                resultado.style.color = '#721c24';
+                resultado.style.border = '1px solid #f5c6cb';
+            } else {
+                resultado.style.backgroundColor = '#d1ecf1';
+                resultado.style.color = '#0c5460';
+                resultado.style.border = '1px solid #bee5eb';
+            }
+        }
+
+        // Verificar que el script se cargó
+        console.log('✅ test-modal-email.html cargado correctamente');
+
+        // Verificar que email-modal.js está disponible
+        setTimeout(() => {
+            if (typeof window.mostrarModalEmailCita === 'function') {
+                console.log('✅ Función mostrarModalEmailCita disponible');
+            } else {
+                console.error('❌ Función mostrarModalEmailCita NO disponible');
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>

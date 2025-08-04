@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Cita Médica</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f4; padding: 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0"
+                    style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+
+                    <!-- Header -->
+                    <tr>
+                        <td
+                            style="background-color: #2c5aa0; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 28px;">✅ Cita Confirmada</h1>
+                            <p style="color: #e8f4fd; margin: 10px 0 0 0; font-size: 16px;">Su cita médica ha sido
+                                agendada exitosamente</p>
+                        </td>
+                    </tr>
+
+                    <!-- Saludo -->
+                    <tr>
+                        <td style="padding: 30px 40px 20px 40px;">
+                            <h2 style="color: #333333; margin: 0 0 15px 0; font-size: 22px;">Estimado/a {{to_name}},
+                            </h2>
+                            <p style="color: #666666; line-height: 1.6; margin: 0; font-size: 16px;">
+                                Nos complace confirmar que su cita médica ha sido agendada correctamente. A continuación
+                                encontrará todos los detalles:
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Detalles de la cita -->
+                    <tr>
+                        <td style="padding: 0 40px;">
+                            <table width="100%" cellpadding="0" cellspacing="0"
+                                style="background-color: #f8f9fa; border-radius: 6px; border-left: 4px solid #2c5aa0;">
+                                <tr>
+                                    <td style="padding: 25px;">
+                                        <h3 style="color: #2c5aa0; margin: 0 0 20px 0; font-size: 18px;">📅 Detalles de
+                                            su Cita</h3>
+
+                                        <table width="100%" cellpadding="8" cellspacing="0">
+                                            <tr>
+                                                <td
+                                                    style="color: #333333; font-weight: bold; width: 120px; font-size: 14px;">
+                                                    📅 Fecha:</td>
+                                                <td style="color: #666666; font-size: 14px;">{{fecha_cita}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #333333; font-weight: bold; font-size: 14px;">🕐 Hora:
+                                                </td>
+                                                <td style="color: #666666; font-size: 14px;">{{hora_cita}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #333333; font-weight: bold; font-size: 14px;">👨‍⚕️
+                                                    Doctor:</td>
+                                                <td style="color: #666666; font-size: 14px;">{{doctor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #333333; font-weight: bold; font-size: 14px;">🏥
+                                                    Especialidad:</td>
+                                                <td style="color: #666666; font-size: 14px;">{{especialidad}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Información de la clínica -->
+                    <tr>
+                        <td style="padding: 30px 40px 20px 40px;">
+                            <h3 style="color: #2c5aa0; margin: 0 0 15px 0; font-size: 18px;">🏥 Información de la
+                                Clínica</h3>
+                            <table width="100%" cellpadding="5" cellspacing="0">
+                                <tr>
+                                    <td style="color: #333333; font-weight: bold; width: 80px; font-size: 14px;">Nombre:
+                                    </td>
+                                    <td style="color: #666666; font-size: 14px;">{{clinica_nombre}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #333333; font-weight: bold; font-size: 14px;">Dirección:</td>
+                                    <td style="color: #666666; font-size: 14px;">{{clinica_direccion}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #333333; font-weight: bold; font-size: 14px;">Teléfono:</td>
+                                    <td style="color: #666666; font-size: 14px;">{{clinica_telefono}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Instrucciones importantes -->
+                    <tr>
+                        <td style="padding: 20px 40px;">
+                            <div
+                                style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 20px;">
+                                <h4 style="color: #856404; margin: 0 0 10px 0; font-size: 16px;">⚠️ Instrucciones
+                                    Importantes</h4>
+                                <ul style="color: #856404; margin: 0; padding-left: 20px; font-size: 14px;">
+                                    <li>Llegue 15 minutos antes de su cita</li>
+                                    <li>Traiga su documento de identidad</li>
+                                    <li>Si tiene seguro médico, traiga su tarjeta</li>
+                                    <li>En caso de no poder asistir, cancele con 24 horas de anticipación</li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Contacto -->
+                    <tr>
+                        <td style="padding: 20px 40px 30px 40px;">
+                            <p style="color: #666666; line-height: 1.6; margin: 0; font-size: 14px;">
+                                Si necesita reprogramar o cancelar su cita, por favor contáctenos al
+                                <strong>{{clinica_telefono}}</strong>
+                                o responda a este correo electrónico.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td
+                            style="background-color: #f8f9fa; padding: 25px 40px; text-align: center; border-radius: 0 0 8px 8px; border-top: 1px solid #e9ecef;">
+                            <p style="color: #666666; margin: 0; font-size: 14px;">
+                                Gracias por confiar en nosotros para su atención médica.
+                            </p>
+                            <p style="color: #999999; margin: 10px 0 0 0; font-size: 12px;">
+                                Este es un mensaje automático, por favor no responda a este correo.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
